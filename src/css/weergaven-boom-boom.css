@@ -1,0 +1,170 @@
+/* weergaven/boom/boom.css */
+/* ui/weergaven/boom/boom.css: the tree view as a family tree diagram (design files for the tree, README point 10).
+   Phone upright (trunk at the bottom, branches upwards), tablet and laptop horizontal (trunk on the left, branches to the right).
+   Colours only through tokens; the branches in --tak, open spots in --lijn-sterk and --inkt-3. Everything under .boom. */
+
+/* ---------- Breadcrumb ---------- */
+.boom .kruimels{display:flex;align-items:center;gap:6px;min-width:0;min-height:var(--doel);font-size:14px;line-height:1.45;white-space:nowrap;overflow:hidden}
+.boom .kruimels a{display:inline-block;flex:0 0 auto;min-width:var(--doel);padding:12px 8px;margin:-12px -8px;text-align:center;text-underline-offset:3px}
+.boom .kruimels a.kr-huis{display:inline-flex;gap:8px;min-width:0;padding:0 12px 0 10px;margin:0;text-decoration:none}
+.boom .kr-nu{min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.boom .kr-pijl,.boom .kr-rest{color:var(--inkt-2);flex:0 0 auto}
+
+/* ---------- Guide above the tree ---------- */
+.boom-hint{font-size:13px;line-height:1.4;color:var(--inkt-2)}
+.boom-hint .t{display:inline-grid;place-items:center;width:18px;height:18px;margin:0 2px;border:1px solid var(--lijn-sterk);border-radius:9px;vertical-align:-4px;color:var(--inkt-2)}
+
+/* ---------- Canvas and branches ---------- */
+.boom-vlak{position:relative}
+.boom-vlak.boom-schuift{overflow-x:auto;overscroll-behavior-x:contain} /* only when the tree really does not fit; the page never scrolls sideways */
+.boom-doek{position:relative}
+.boom-takken{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+.boom-takken .tak{fill:none;stroke:var(--tak);stroke-linecap:round;stroke-linejoin:round}
+.boom-takken .tak-leeg{fill:none;stroke:var(--lijn-sterk);stroke-dasharray:2 4;stroke-linecap:round}
+
+/* Arrow at the end of an outer branch: target 44 px, visible circle 30 px. */
+.boom .tip{position:absolute;display:grid;place-items:center;width:var(--doel);height:var(--doel);border-radius:22px;color:var(--inkt-2);text-decoration:none}
+.boom .tip>span{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--lijn);border-radius:15px;background:var(--ondergrond)}
+@media (hover:hover) and (pointer:fine){.boom .tip:hover>span{background:var(--actief);color:var(--inkt)}}
+.boom .tip:focus-visible{outline-offset:-2px;border-radius:22px}
+
+/* A person who is open on the person card. Hover background --bewijsvlak: a grey italic
+   name (unconfirmed) also reaches AA on it, which just failed on --actief (4.4:1). */
+.boom .is-open{background:var(--bewijsvlak);box-shadow:inset 0 0 0 2px var(--inkt)}
+
+/* ---------- The trunk ---------- */
+.boom-stam{position:relative}
+.boom-stam .stam-nr{display:block}
+.boom-stam .stam-naam{margin:0;overflow-wrap:break-word}
+.boom-stam .stam-meta{color:var(--inkt-2)}
+.stam-regel{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.stam-st{display:inline-flex;align-items:center;gap:6px}
+.stam-knop{margin-top:12px}
+.stam-knop svg{flex:0 0 auto}
+.stam-knop::after{content:"";position:absolute;inset:0;border-radius:inherit} /* the button is the link; it covers the whole area */
+.stam-knop:focus-visible{outline-offset:2px}
+
+/* ---------- Phone: upright ---------- */
+.boom-staand{display:flex;flex-direction:column}
+.boom-staand .boom-balk{display:flex;align-items:center;height:48px;padding:0 calc(12px + env(safe-area-inset-right)) 0 calc(20px + env(safe-area-inset-left));min-width:0}
+.boom-staand .boom-hint{margin-top:-2px;padding:0 12px 0 20px}
+.boom-staand .boom-vlak{order:2;margin-top:6px}
+.boom-staand .boom-voet{order:3;flex:1 0 auto;display:flex;flex-direction:column}
+.boom-stamlijn{flex:1 0 16px;width:2.6px;margin:0 auto;background:var(--tak)}
+.stam-staat{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:start;margin:0 20px 4px;padding:14px 16px 16px;background:var(--papier);border:1px solid var(--lijn);border-radius:14px}
+@media (hover:hover) and (pointer:fine){.stam-staat:hover{border-color:var(--lijn-sterk)}}
+.stam-staat .stam-nr{line-height:.9}
+.stam-staat .stam-tekst{min-width:0}
+.stam-staat .stam-naam{font-size:23px;line-height:1.15;text-wrap:pretty}
+.stam-staat .stam-meta{margin-top:5px;font-size:15px;line-height:1.25}
+.stam-staat .stam-regel{margin-top:7px;font-size:14px;line-height:1.3}
+.stam-staat .stam-knop{background:var(--ondergrond)}
+@media (hover:hover) and (pointer:fine){.stam-staat .stam-knop:hover{background:var(--actief)}}
+
+/* Node above a fork: name centred; the background covers the line that runs into the node. */
+.boom .v{position:absolute;display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:10px;background:var(--ondergrond);text-align:center;text-decoration:none;color:var(--inkt)}
+@media (hover:hover) and (pointer:fine){.boom a.v:hover{background:var(--bewijsvlak)}}
+.boom a.v.is-open{background:var(--bewijsvlak)}
+.v-kop{display:flex;align-items:center;justify-content:center;gap:5px;line-height:1}
+.v-nr{line-height:1}
+.v-naam{max-width:100%;margin-top:5px;line-height:1.22;text-wrap:balance;overflow-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.v-meta{display:block;max-width:100%;line-height:1.3;color:var(--inkt-2);text-wrap:balance}
+.v-jaren{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.v-plaats{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v-g1 .v-nr{font-size:18px}
+.v-g1 .v-naam{font-size:16px;-webkit-line-clamp:3}
+.v-g1 .v-meta{font-size:13px}
+.v-g1 .v-jaren{-webkit-line-clamp:1}
+.v-g2 a.v{padding-left:2px;padding-right:2px} /* 84 px for the name: this way “Exampleford” fits without breaking */
+.v-g2 .v-nr{font-size:17px}
+.v-g2 .v-naam{font-size:14.5px;-webkit-line-clamp:4}
+.v-g2 .v-meta{font-size:12.5px}
+.boom .v-leeg{border:1px dashed var(--lijn-sterk);color:var(--inkt-3)}
+.v-leeg .v-nr{color:var(--inkt-3)}
+.v-leeg .v-naam{margin-top:4px;font-family:var(--letter-naam);font-weight:400;font-style:italic;color:var(--inkt-3);-webkit-line-clamp:3}
+.boom .v:focus-visible{outline-offset:0}
+
+/* On the phone the tree fills the screen up to the bottom bar, so the trunk sits at the bottom. */
+@media (max-width:759px){
+  .hoofd:has(>.boom:not([hidden])){display:flex;flex-direction:column}
+  .hoofd>.boom:not([hidden]){flex:1 0 auto}
+}
+
+/* ---------- Tablet and laptop: horizontal ---------- */
+.boom-liggend .boom-balk{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.boom-liggend .boom-balk .kruimels{flex:1 1 320px;flex-wrap:wrap;row-gap:4px}
+.boom-knoppen{display:flex;gap:8px;flex:0 0 auto}
+.boom-knop{font-size:14px}
+.boom-knop[disabled]{color:var(--inkt-3);border-color:var(--lijn);cursor:default}
+.boom-knop[disabled]:hover{background:var(--papier)}
+.boom-knop[aria-pressed="true"]{background:var(--actief);font-weight:600}
+.boom-tablet .boom-hint{margin-top:12px;font-size:14px}
+.boom-tablet .boom-vlak{margin-top:18px}
+.boom-laptop .boom-balk{gap:16px;margin-top:-2px}
+.boom-laptop .boom-hint{margin-top:2px;font-size:13.5px}
+.boom-laptop .boom-vlak{margin-top:7px}
+.boom-liggend .boom-vlak:first-child,.boom-liggend .boom-balk+.boom-vlak{margin-top:16px}
+
+.boom-kolomkop{position:absolute;top:0;display:flex;align-items:baseline;gap:8px;white-space:nowrap;color:var(--inkt-2)}
+.boom-kolomkop .getal{font-size:19px}
+.boom-kolomkop span+span{font-size:13.5px;font-weight:600}
+
+/* A person on their branch: number, name and status shape above the line; the line is the bottom border, so it stays on hover. */
+.boom .tk{position:absolute;display:block;border-radius:8px;text-decoration:none;color:var(--inkt)}
+@media (hover:hover) and (pointer:fine){.boom a.tk:hover{background:var(--bewijsvlak)}}
+.tk-boven{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:8px;row-gap:1px;align-content:end;align-items:baseline;padding:0 12px 4px 4px;border-bottom:var(--dikte) solid var(--tak)}
+.boom-omgekeerd .tk-boven{padding:0 4px 4px 12px}
+.tk-nr{display:grid;font-size:var(--nr);line-height:1}
+.tk-nr>span{grid-area:1/1}
+.tk-mal{visibility:hidden} /* as wide as the longest number in the column: the names start on one line */
+.tk-naam{min-width:0;font-size:var(--naam);line-height:var(--lh);overflow-wrap:break-word;text-wrap:balance;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--regels);overflow:hidden}
+.naam-een .tk-naam{display:block;white-space:nowrap;text-overflow:ellipsis}
+.tk-st{justify-content:flex-end}
+.tk-meta{grid-column:2/4;min-width:0;font-size:var(--meta);line-height:var(--mlh);color:var(--inkt-2);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--mregels);overflow:hidden}
+.meta-een .tk-meta{display:block;white-space:nowrap;text-overflow:ellipsis}
+.boom .tk-leeg .tk-boven{border-bottom:1.3px dashed var(--lijn-sterk)}
+.tk-leeg .tk-nr{color:var(--inkt-3)}
+.tk-leeg .tk-naam{grid-column:2/4;font-family:var(--letter-naam);font-weight:400;font-style:italic;color:var(--inkt-3);-webkit-line-clamp:2}
+.boom .tk:focus-visible{outline-offset:0;border-radius:8px}
+/* Stacked (long numbers in a narrow column): number and status shape on the first line, the name below. */
+.tk-stapel .tk-boven{grid-template-columns:minmax(0,1fr) auto}
+.tk-stapel .tk-nr{grid-column:1;grid-row:1}
+.tk-stapel .tk-st{grid-column:2;grid-row:1}
+.tk-stapel .tk-naam,.tk-stapel .tk-meta,.tk-stapel .tk-leeg .tk-naam{grid-column:1/3}
+
+/* The trunk horizontal: large, on the thickest branch. */
+.stam-ligt{position:absolute;border-radius:8px}
+@media (hover:hover) and (pointer:fine){.stam-ligt:hover{background:var(--bewijsvlak)}}
+.stam-boven{display:grid;grid-template-columns:minmax(0,1fr);row-gap:4px;align-content:end;padding:0 12px 8px 4px;border-bottom:2.6px solid var(--tak)}
+.stam-ligt .stam-nr{margin-bottom:6px;line-height:.8}
+.stam-ligt .stam-naam{text-wrap:balance;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.stam-ligt .stam-meta{font-size:14px}
+.stam-onder{padding:10px 12px 0 4px}
+.boom-omgekeerd .stam-boven{padding:0 4px 8px 12px}
+.boom-omgekeerd .stam-onder{padding:10px 4px 0 12px}
+.stam-ligt .stam-regel{font-size:13.5px}
+.stam-rel{margin-top:4px;font-size:13.5px}
+.stam-ligt .stam-knop{padding:0 12px;white-space:nowrap} /* this also fits in the narrow trunk column of the tablet (148 px) */
+
+/* ---------- Open end as focus, and a link that is wrong ---------- */
+.boom-focus-leeg{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:start;margin:12px 20px 0;padding:14px 16px 16px;border:1px dashed var(--lijn-sterk);border-radius:14px}
+.boom-liggend .boom-focus-leeg{max-width:560px;margin:24px 0 0}
+.boom-focus-leeg .boom-nr{line-height:.9}
+.boom-focus-leeg .boom-naam{font-size:23px;line-height:1.15}
+.boom-focus-leeg .boom-naam:focus{outline:none}
+.boom-focus-leeg .boom-meta{margin-top:6px;font-size:15px;line-height:1.5}
+.boom-focus-leeg .boom-meta a{color:var(--inkt)}
+.boom-fout{max-width:440px;margin:40px auto 0;padding:24px 20px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);text-align:center}
+.boom-fout-kop{font-size:24px;line-height:1.2}
+.boom-fout .bijtekst{margin-top:8px;font-size:15px;line-height:1.5}
+.boom-fout p:last-child{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+
+/* ---------- Sidebar: the counts as links ---------- */
+a.tel-rij{text-decoration:none;color:var(--inkt)}
+@media (hover:hover) and (pointer:fine){a.tel-rij:hover{background:var(--actief)}}
+a.tel-rij:focus-visible{outline-offset:-2px}
+
+@media (prefers-reduced-motion:no-preference){
+  .boom .tk,.boom .v,.boom .tip>span,.stam-ligt,.stam-staat,a.tel-rij{transition:background-color .12s,border-color .12s}
+}
+

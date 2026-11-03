@@ -1,0 +1,19 @@
+{
+  "name": "openroots",
+  "version": "0.1.0",
+  "description": "A free, open-source ancestor chart (Ahnentafel) with an agent workflow for researching ancestors in free and open archives.",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "node build.mjs",
+    "demo": "node build.mjs --data examples/demo --out dist/demo.html",
+    "smoke": "node tools/smoke.mjs dist/demo.html",
+    "test": "npm run demo && npm run smoke"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  },
+  "keywords": ["genealogy", "ahnentafel", "family-tree", "pedigree", "open-source", "agents"]
+}

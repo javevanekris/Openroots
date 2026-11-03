@@ -1,0 +1,141 @@
+/* weergaven/register/register.css */
+/* ui/weergaven/register/register.css: the register. Rows, group headings and the list are in basis.css;
+   here the heading with search field and filter chips, the status line, the empty state, the generation rail and the columns.
+   Sizes from the design files (register phone and laptop). The column layout follows the
+   width of the view itself (container query), so it also works when the person card is open next to it. */
+.weergave-register{container-type:inline-size;padding-bottom:16px}
+
+/* ---------- Heading: title, search field, chips ---------- */
+.reg-titel{padding:6px 20px 10px}
+.reg-titel h1{font-size:27px;line-height:1.15;text-wrap:pretty}
+.reg-titel .bijtekst{margin-top:4px;font-size:15px;line-height:1.4}
+.reg-werkbalk{padding:0 20px 10px;display:flex;flex-direction:column;gap:10px}
+.reg-zoek{position:relative;margin:0}
+.reg-zoek-icoon{position:absolute;left:12px;top:11px;color:var(--inkt-2);pointer-events:none}
+.reg-zoek input{
+  width:100%;height:var(--doel);padding:0 12px 0 40px;
+  border:1px solid var(--lijn-sterk);border-radius:var(--straal);
+  font-size:15px;background:var(--papier);color:var(--inkt);
+}
+.reg-zoek input::placeholder{color:var(--inkt-3)}
+.reg-zoek input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;width:16px;height:16px;cursor:pointer;background:currentColor;-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><path d='M6 6l12 12M18 6 6 18'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><path d='M6 6l12 12M18 6 6 18'/></svg>") center/contain no-repeat}
+
+.reg-filters{display:flex;gap:8px;flex-wrap:wrap}
+.reg-filter{position:relative}
+.reg-chip{
+  display:inline-flex;align-items:center;gap:8px;min-height:var(--doel);padding:0 14px;
+  border:1px solid var(--lijn-sterk);border-radius:22px;background:var(--papier);color:var(--inkt);
+  font-size:14px;white-space:nowrap;
+}
+@media (hover:hover) and (pointer:fine){.reg-chip:hover{background:var(--actief)}}
+.reg-chip-aan{background:var(--actief);border-color:var(--inkt);font-weight:600}
+.reg-chip[aria-expanded="true"] svg{transform:rotate(180deg)}
+.reg-keuze{
+  position:absolute;left:0;top:calc(100% + 6px);z-index:6;min-width:280px;max-width:min(340px,calc(100vw - 40px));
+  display:flex;flex-direction:column;gap:2px;padding:8px;
+  background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);
+  box-shadow:0 10px 30px rgba(0,0,0,.14);
+}
+.reg-keuze[hidden]{display:none}
+.reg-filter:last-child .reg-keuze{left:auto;right:0}
+.reg-keuze-kop{padding:6px 10px 4px;font-size:13px;font-weight:600;color:var(--inkt-2)}
+.reg-optie{
+  display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:10px;
+  min-height:var(--doel);padding:0 10px;border:0;border-radius:var(--straal);background:transparent;color:var(--inkt);
+  font-size:15px;text-align:left;
+}
+@media (hover:hover) and (pointer:fine){.reg-optie:hover{background:var(--actief)}}
+.reg-optie[aria-pressed="true"]{background:var(--actief);font-weight:600;box-shadow:inset 0 0 0 1px var(--inkt)}
+.reg-optie-nr{font-size:19px}
+.reg-optie .status{justify-content:center}
+.reg-optie-aantal{color:var(--inkt-2);font-weight:400;font-variant-numeric:tabular-nums}
+.reg-keuze-wis{align-self:flex-start;margin-top:2px;min-height:var(--doel);font-size:14px}
+
+/* ---------- Status line ---------- */
+.reg-statusrij{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px 4px;border-top:1px solid var(--lijn)}
+.reg-statusrij-leeg{padding:0;border:0;min-height:0}
+.reg-statusrij-stil{padding:0;margin:0;border:0;min-height:0}
+.reg-status{font-size:14px;color:var(--inkt-2);line-height:1.45}
+.reg-wis{display:inline-flex;align-items:center;gap:6px;min-height:var(--doel);font-size:14px;white-space:nowrap;flex:0 0 auto}
+.reg-wis[hidden]{display:none}
+.reg-wis-lang{display:none}
+
+/* ---------- List ---------- */
+.reg-gen .groep-kop h2{flex:1 1 auto;min-width:0}
+.reg-gen h2:focus{outline:none}
+.reg-gen h2:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.groep-kop .reg-van{font-size:14px;color:var(--inkt-2);white-space:nowrap}
+.reg-blok[aria-busy="true"]{box-sizing:border-box}
+.reg-gen .rij .status{flex-wrap:wrap;gap:2px;max-width:28px}
+.reg-gen .rij-tekst{min-width:0}
+/* One fixed number column for all generations: wide enough for seven digits (8,388,607 is the highest
+   number in generation XXIII; a digit is 0.5 em, so 70 px at 20 px), numbers right-aligned, and 16 px of space
+   before the name. This way the names sit in the same place in every generation and number and name never run into each other. */
+.reg-gen .rij{grid-template-columns:72px minmax(0,1fr) 28px;column-gap:16px}
+.reg-gen .rij-nr{font-size:20px;text-align:right;white-space:nowrap}
+.reg-hint{margin:14px 20px 0;font-size:14px;line-height:1.45;color:var(--inkt-2)}
+.reg-meer{display:flex;justify-content:center;padding:16px 20px 0}
+.reg-rail{display:none}
+
+/* ---------- Empty state ---------- */
+.reg-leeg{margin:24px 20px 0;padding:22px 20px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);text-align:center}
+.reg-leeg-icoon{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:24px;background:var(--bewijsvlak);color:var(--inkt-2)}
+.reg-leeg h2{margin-top:12px;font-size:21px;line-height:1.25;text-wrap:pretty}
+.reg-leeg p{margin-top:8px;font-size:15px;line-height:1.5;color:var(--inkt-2)}
+.reg-leeg-knoppen{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.reg-leeg .knop{padding:0 16px;font-size:15px}
+.reg-inkt,.reg-inkt:hover{background:var(--inkt);border-color:var(--inkt);color:var(--papier);font-weight:600}
+.reg-hint-leeg{font-size:13px;margin-top:16px}
+
+/* Phone: the generation heading stays above the rows, so you know where you are in a long list. */
+@media (max-width:759px){
+  .reg-gen .groep-kop{position:sticky;top:0;z-index:2;background:var(--ondergrond)}
+}
+
+/* ---------- Tablet and laptop: heading in one row, rail and two columns follow the available width ---------- */
+@media (min-width:760px){
+  .reg-titel{padding:0}
+  .reg-titel h1{font-size:30px}
+  .reg-kop{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+  .reg-werkbalk{padding:0;flex-direction:row;align-items:center;flex-wrap:wrap;gap:8px}
+  .reg-zoek{width:320px;max-width:100%}
+  .reg-filters{flex-wrap:nowrap}
+  .reg-statusrij{margin-top:22px;padding:12px 0 0;justify-content:flex-start;gap:16px}
+  .reg-statusrij-leeg,.reg-statusrij-stil{margin:0;padding:0}
+  .reg-status{font-size:15px}
+  .reg-wis-kort{display:none}
+  .reg-wis-lang{display:inline}
+  .reg-lijf{margin-top:10px}
+  .reg-hint{margin:18px 0 0}
+  .reg-meer{padding:16px 0 0}
+  .reg-leeg{max-width:520px;margin:24px auto 0}
+  .reg-hint-leeg{text-align:center;max-width:520px;margin-left:auto;margin-right:auto}
+}
+@container (min-width:860px){
+  .reg-gen .rijen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;row-gap:2px}
+}
+@container (min-width:760px){
+  .reg-lijf{display:grid;grid-template-columns:minmax(0,1fr) 92px;column-gap:24px;align-items:start}
+  .reg-rail{
+    display:flex;flex-direction:column;gap:0;padding:6px 0;
+    position:sticky;top:24px;max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);overflow:auto;
+    background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);
+  }
+  .reg-rail button{
+    display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;min-height:32px;padding:0 10px;
+    border:0;background:transparent;color:var(--inkt-2);font-size:12px;text-align:right;border-radius:0;
+  }
+  .reg-rail button .getal{font-size:15px;color:var(--inkt);text-align:left;white-space:nowrap}
+  .reg-rail-aantal{white-space:nowrap}
+  @media (hover:hover) and (pointer:fine){.reg-rail button:hover{background:var(--actief)}}
+  .reg-rail button[aria-current="true"]{background:var(--actief);color:var(--inkt);font-weight:600}
+  .reg-rail button:disabled{color:var(--inkt-3);cursor:default}
+  .reg-rail button:disabled .getal{color:var(--inkt-3)}
+  .reg-rail button:focus-visible{outline-offset:-2px}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .reg-chip svg{transition:transform .15s}
+  .reg-optie,.reg-chip,.reg-rail button{transition:background-color .12s}
+}
+

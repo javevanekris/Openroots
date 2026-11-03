@@ -1,0 +1,103 @@
+/* weergaven/overzicht/overzicht.css */
+/* ui/weergaven/overzicht/overzicht.css: the full overview. Sizes from the design files (overview phone and laptop).
+   Colour says via which grandparent (--lijn-4 … --lijn-7), the fill says how certain: solid = confirmed by a record,
+   hatched = supported, outlined = with reservation, grey = unconfirmed. Colour never means evidence. */
+.weergave-overzicht{--staaf-nb:var(--lijn-sterk);padding-bottom:8px}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .weergave-overzicht{--staaf-nb:var(--inkt-3)}
+}
+:root[data-theme="dark"] .weergave-overzicht{--staaf-nb:var(--inkt-3)}
+
+.ov-kop{padding:6px 20px 10px}
+.ov-titel{font-size:27px;line-height:1.15;text-wrap:pretty}
+.ov-sub{margin-top:4px;font-size:15px;line-height:1.4}
+.ov-sub-meer{display:none}
+
+/* The four grandparent cards */
+.ov-kaarten{list-style:none;margin:0;padding:0 20px 6px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ov-kaart{
+  display:flex;flex-direction:column;gap:2px;min-height:var(--doel);padding:12px 14px;
+  background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);
+  text-decoration:none;color:var(--inkt);
+}
+@media (hover:hover) and (pointer:fine){.ov-kaart:hover{background:var(--actief)}}
+.ov-kaart-kop{display:flex;align-items:baseline;gap:8px}
+.ov-kaart-nr{font-size:24px}
+.ov-kaart-naam{font-size:16px;line-height:1.25}
+.ov-kaart-regel{font-size:14px;color:var(--inkt-2)}
+.ov-kaart-kop+.ov-kaart-regel{margin-top:4px}
+.ov-kaart-regel b{font-weight:600;color:var(--inkt)}
+
+/* Legend in words */
+.ov-legenda{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:10px 20px 0;font-size:13px;color:var(--inkt-2)}
+.ov-legenda-item{display:inline-flex;align-items:center;gap:6px}
+.ov-vlak{display:inline-block;width:14px;height:10px;border-radius:2px;flex:0 0 auto}
+.ov-vlak-akte{background:var(--inkt)}
+.ov-vlak-onderbouwd{background:repeating-linear-gradient(135deg,var(--inkt) 0 2px,var(--papier) 2px 4.5px)}
+.ov-vlak-voorbehoud{background:var(--papier);box-shadow:inset 0 0 0 1.5px var(--inkt)}
+.ov-vlak-nietbevestigd{background:var(--staaf-nb)}
+
+/* Per generation: phone first (Roman numeral, name, count; the bar on the second line) */
+.ov-generaties{padding:8px 20px 0}
+.ov-koprij{display:none}
+.ov-rijen{list-style:none;margin:0;padding:0}
+.ov-rij{
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;row-gap:5px;align-items:baseline;
+  min-height:var(--doel);padding:7px 0 6px;border-top:1px solid var(--lijn);
+  text-decoration:none;color:var(--inkt);
+}
+@media (hover:hover) and (pointer:fine){a.ov-rij:hover{background:var(--papier)}}
+a.ov-rij:focus-visible{outline-offset:-2px}
+.ov-gen{display:flex;align-items:baseline;gap:8px;min-width:0}
+.ov-romein{flex:0 0 auto;min-width:50px;font-size:18px;color:var(--inkt-2)}
+.ov-gen-naam{min-width:0;font-size:13px;font-weight:600;color:var(--inkt-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ov-aantal{font-size:15px;white-space:nowrap}
+.ov-van{color:var(--inkt-2);font-size:13px}
+.ov-staaf-cel{grid-column:1/-1;min-width:0}
+.ov-rij-basis .ov-staaf-cel{display:none}
+.ov-rij-basis .ov-gen-naam{font-weight:400}
+/* On the phone the number of open ends is for screen readers only; from 760 px it is a column. */
+.ov-open{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* The bar: one span per segment, colour via --k, shape via data-status */
+.ov-staaf{display:flex;height:14px;border-radius:3px;overflow:hidden}
+.ov-seg-lijn{margin-left:1px}
+.ov-seg{flex:0 1 0;min-width:2px;background:var(--k)}
+.ov-seg[data-status="onderbouwd"]{background:repeating-linear-gradient(135deg,var(--k) 0 2px,var(--papier) 2px 4.5px)}
+.ov-seg[data-status="voorbehoud"]{background:var(--papier);box-shadow:inset 0 0 0 1.5px var(--k)}
+.ov-seg[data-status="voorbehoud"].ov-seg-smal{background:var(--k);box-shadow:none;opacity:.35}
+.ov-seg[data-status="nietbevestigd"]{background:var(--staaf-nb)}
+.ov-seg[data-status="geen"]{background:var(--papier);box-shadow:inset 0 0 0 1px var(--lijn-sterk)}
+
+@media (prefers-reduced-motion:no-preference){
+  .ov-kaart,.ov-rij{transition:background-color .12s}
+}
+
+/* ---------- Tablet and laptop: table with four columns ---------- */
+@media (min-width:760px){
+  .weergave-overzicht{max-width:1100px}
+  .ov-kop,.ov-kaarten,.ov-legenda,.ov-generaties{padding-left:0;padding-right:0}
+  .ov-kop{padding-top:0;padding-bottom:0}
+  .ov-sub-meer{display:inline}
+  .ov-kaarten{margin-top:18px;gap:10px}
+  .ov-legenda{margin-top:18px}
+  .ov-generaties{padding-top:8px}
+  .ov-koprij{display:grid;grid-template-columns:200px 100px minmax(0,1fr) 90px;column-gap:14px;padding:6px 0;font-size:13px;font-weight:600;color:var(--inkt-2)}
+  .ov-koprij span:nth-child(2),.ov-koprij span:nth-child(4){text-align:right}
+  .ov-rij{grid-template-columns:200px 100px minmax(0,1fr) 90px;column-gap:14px;row-gap:0;align-items:center;min-height:var(--doel);padding:0}
+  .ov-rij-basis{min-height:36px}
+  .ov-rij-basis .ov-staaf-cel{display:block}
+  .ov-gen{align-self:stretch;align-items:center;gap:10px}
+  .ov-gen-naam{font-size:13.5px;white-space:normal;line-height:1.25}
+  .ov-rij-basis .ov-gen-naam{font-size:14px}
+  .ov-aantal{text-align:right}
+  .ov-staaf-cel{grid-column:auto}
+  .ov-open{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;text-align:right;font-size:15px;color:var(--inkt-2)}
+}
+@media (min-width:1180px){
+  .ov-titel{font-size:30px}
+  .ov-kaarten{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .ov-koprij,.ov-rij{grid-template-columns:240px 110px minmax(0,1fr) 100px;column-gap:20px}
+  a.ov-rij{min-height:40px}
+}
+

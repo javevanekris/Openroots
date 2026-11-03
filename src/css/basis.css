@@ -1,0 +1,275 @@
+/* basis.css */
+/* ui/basis.css: reset, fonts, the shell on phone (< 760 px), tablet (760–1179 px) and laptop (≥ 1180 px),
+   navigation, buttons, focus, reduced motion and safe areas. Sizes come from the design files (direction A). */
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:12px}
+body{
+  font-family:var(--letter-tekst);
+  font-size:16px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0}
+img,svg{display:block;max-width:100%}
+img{height:auto}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--inkt);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{color:var(--inkt)}
+
+.naam,.kop-serif{font-family:var(--letter-naam);font-weight:600}
+.getal{font-family:var(--letter-naam);font-variant-numeric:oldstyle-nums tabular-nums}
+.bijtekst{color:var(--inkt-2)}
+.onzichtbaar{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Focus: visible for the keyboard, quiet for the mouse. */
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.tab:focus-visible,.nav-weergaven a:focus-visible,.rij:focus-visible{outline-offset:-2px}
+.persoon:focus,.meer:focus,.hoofd:focus{outline:none}
+
+.spring{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 14px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal)}
+.spring:focus{top:12px}
+
+/* ---------- Buttons ---------- */
+.knop{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:var(--doel);padding:0 14px;
+  border:1px solid var(--lijn-sterk);border-radius:var(--straal);
+  background:var(--papier);color:var(--inkt);font-size:14px;text-decoration:none;
+}
+.knop-rond{border-color:var(--lijn);border-radius:22px;padding:0 16px;font-size:15px}
+.knop-stil{border:0;background:transparent;padding:0 8px;font-size:15px;text-decoration:underline;text-underline-offset:3px}
+/* Hover only with a mouse: on a touch screen it sticks after a tap (sticky hover). */
+@media (hover:hover) and (pointer:fine){.knop:hover{background:var(--actief)}.knop-stil:hover{background:transparent;color:var(--inkt)}}
+.knop-icoon{width:var(--doel);height:var(--doel);padding:0;border:0;background:transparent;border-radius:22px;display:grid;place-items:center}
+
+.schakel{display:inline-flex;border:1px solid var(--lijn-sterk);border-radius:var(--straal);overflow:hidden}
+.schakel button{min-height:var(--doel);padding:0 12px;border:0;background:transparent;color:var(--inkt-2);font-size:14px}
+.schakel button+button{border-left:1px solid var(--lijn-sterk)}
+.schakel button[aria-pressed="true"]{background:var(--actief);color:var(--inkt);font-weight:600}
+.schakel button:focus-visible{outline-offset:-3px}
+
+/* ---------- Status shapes (always in ink colour) ---------- */
+.status{display:inline-flex;align-items:center;justify-content:center;color:var(--inkt);flex:0 0 auto}
+.status svg{display:block}
+.status-nb{font-family:var(--letter-naam);font-style:italic;color:var(--inkt-3);font-size:15px;line-height:1}
+.naam-nb{font-style:italic;color:var(--inkt-3);font-weight:400}
+
+/* ---------- Register rows (shared with the start view and the later register view) ---------- */
+.groep-kop{display:flex;align-items:baseline;gap:10px;padding:14px 20px 6px;border-top:1px solid var(--lijn)}
+.groep-kop .getal{font-size:20px;color:var(--inkt-2)}
+.groep-kop h2{font-size:14px;font-weight:600;color:var(--inkt-2)}
+.rijen{list-style:none;margin:0;padding:0 10px;display:flex;flex-direction:column;gap:2px}
+.rij{
+  display:grid;grid-template-columns:48px minmax(0,1fr) 28px;align-items:center;column-gap:8px;
+  min-height:56px;padding:6px 10px;border-radius:var(--straal-groot);text-decoration:none;color:var(--inkt);
+}
+@media (hover:hover) and (pointer:fine){.rij:hover{background:var(--papier)}}
+.rij[aria-current="true"]{background:var(--papier);box-shadow:inset 0 0 0 2px var(--inkt)}
+.rij-nr{font-size:24px;color:var(--inkt-2)}
+.rij-naam{display:block;font-family:var(--letter-naam);font-weight:600;font-size:17px;line-height:1.25;text-wrap:pretty}
+.rij-meta{display:block;font-size:14px;color:var(--inkt-2);margin-top:2px}
+.rij .status{justify-content:flex-end}
+
+/* ---------- The shell: phone first ---------- */
+.app{min-height:100%;display:flex;flex-direction:column}
+.kop{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(10px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) 0 calc(20px + env(safe-area-inset-left));
+}
+.kop-titel{font-size:14px;color:var(--inkt-2)}
+.kop-terug{display:inline-flex;align-items:center;gap:2px;min-height:var(--doel);margin-left:-8px;padding:0 8px 0 4px;border:0;background:transparent;font-size:15px;color:var(--inkt)}
+.kop-terug[hidden],.kop-titel[hidden]{display:none}
+.kop-zoek{width:var(--doel);height:var(--doel);display:grid;place-items:center;border-radius:22px;color:var(--inkt)}
+
+.zijbalk{display:none}
+
+.hoofd{flex:1 1 auto;min-width:0;padding:0 env(safe-area-inset-right) calc(96px + env(safe-area-inset-bottom)) env(safe-area-inset-left)}
+.weergave[hidden]{display:none}
+.weergave{min-width:0}
+.weergave-uitleg{padding:12px 20px 24px}
+.weergave-uitleg .panel{max-width:780px;margin:0 auto}
+.komt-nog{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:320px;padding:24px;text-align:center;color:var(--inkt-2)}
+.komt-nog .naam{font-size:24px;color:var(--inkt)}
+
+/* The guide as a readable page; the content itself stays untouched. */
+.panel{font-size:16px;line-height:1.55}
+.panel h2{font-family:var(--letter-naam);font-weight:600;font-size:26px;line-height:1.2;margin:8px 0 12px}
+.panel h3{font-family:var(--letter-naam)!important;font-weight:600;font-size:19px!important;margin:22px 0 6px!important;color:var(--inkt)!important}
+.panel p{margin:0 0 10px}
+.panel ul,.panel ol{margin:0 0 10px;padding-left:20px}
+.panel li{margin:0 0 5px}
+.panel a{color:var(--inkt)}
+.panel details{margin:6px 0 12px}
+.panel summary{cursor:pointer;min-height:var(--doel);display:flex;align-items:center}
+
+/* Bottom bar (phone) */
+.onderbalk{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;
+  padding:8px calc(10px + env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));
+  background:var(--papier);border-top:1px solid var(--lijn);
+}
+.tab{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  min-height:56px;font-size:12px;color:var(--inkt-2);text-decoration:none;border-radius:var(--straal-groot);
+  border:0;background:transparent;padding:0;
+}
+.tab[aria-current="page"],.tab[aria-expanded="true"],.tab.tab-actief{background:var(--actief);color:var(--inkt);font-weight:600}
+
+/* Sheets from the bottom (More, person card on the phone) */
+.scherm{position:fixed;inset:0;z-index:30;background:var(--scherm)}
+.scherm[hidden]{display:none}
+.meer{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;max-height:85%;overflow:auto;
+  background:var(--papier);border-radius:22px 22px 0 0;
+  padding:0 20px calc(20px + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 30px rgba(0,0,0,.12);
+}
+.meer[hidden]{display:none}
+.persoon-greep{display:flex;flex:0 0 auto;align-items:center;justify-content:center;height:28px;margin:0;touch-action:none;cursor:grab}
+.persoon-greep::after{content:"";width:40px;height:5px;border-radius:3px;background:var(--greep)}
+.meer-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:0}
+.meer-kop h2{font-family:var(--letter-naam);font-weight:600;font-size:22px}
+.meer-lijst{display:flex;flex-direction:column;margin-top:8px}
+.meer-lijst a{display:grid;grid-template-columns:28px minmax(0,1fr) 20px;align-items:center;column-gap:12px;min-height:56px;padding:4px 4px;border-top:1px solid var(--lijn);border-radius:0;text-decoration:none;color:var(--inkt)}
+.meer-lijst a>svg:first-child{justify-self:center}
+.meer-lijst .meer-naam{display:block;font-size:16px;font-weight:600}
+.meer-lijst .meer-bij{display:block;font-size:13px;color:var(--inkt-2)}
+.meer-lijst a[aria-current="page"]{background:var(--actief)}
+.meer-thema{margin-top:14px;padding-top:14px;border-top:1px solid var(--lijn)}
+.thema-kopje{margin:0 0 8px;font-size:13px;font-weight:600;color:var(--inkt-2)}
+.thema-radio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;background:var(--ondergrond);border:1px solid var(--lijn);border-radius:var(--straal-groot)}
+.thema-radio button{min-height:var(--doel);border:0;border-radius:9px;font-size:14px;color:var(--inkt);background:transparent}
+.thema-radio button[aria-checked="true"]{background:var(--papier);box-shadow:0 0 0 1px var(--inkt);font-weight:600}
+.thema-radio button:focus-visible{outline-offset:-3px}
+.thema-hulp{margin:8px 0 0;font-size:13px;color:var(--inkt-2)}
+.meer-versie{margin-top:18px}
+.versie{font-size:12.5px;line-height:1.45;color:var(--inkt-2)}
+
+/* Person card on the phone: bottom sheet */
+.persoon{
+  position:fixed;left:0;right:0;bottom:0;top:calc(34px + env(safe-area-inset-top));z-index:40;
+  display:flex;flex-direction:column;
+  background:var(--papier);border-radius:22px 22px 0 0;
+  box-shadow:0 -8px 30px rgba(0,0,0,.14);
+  overflow:hidden;
+}
+.persoon[hidden]{display:none}
+.persoon-kop{display:flex;flex:0 0 auto;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;touch-action:none}
+.persoon-inhoud{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 20px calc(28px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+html.blad-open body{overflow:hidden}
+/* The sheet starts at 34 px and cuts the heading in half; behind the scrim the content stays visible, the heading does not. */
+html.blad-open .kop{visibility:hidden}
+
+.lijnlabel{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--inkt-2)}
+.lijnvlak{width:10px;height:10px;border-radius:2px;background:var(--lijnkleur,var(--inkt-2));flex:0 0 auto}
+
+/* Sidebar parts (tablet and laptop) */
+.zijbalk-kop{padding:0 12px}
+.zijbalk-titel{font-family:var(--letter-naam);font-weight:600;font-size:21px;line-height:1.2}
+.zijbalk-kop .versie{margin-top:8px}
+.zoek{padding:14px 12px 8px}
+.zoek label{display:block;font-size:13px;color:var(--inkt-2);margin-bottom:6px}
+.zoek input{width:100%;height:var(--doel);padding:0 10px;border:1px solid var(--lijn-sterk);border-radius:var(--straal);font-size:14px;background:var(--ondergrond);color:var(--inkt)}
+.zoek input::placeholder{color:var(--inkt-3)}
+.nav-weergaven{display:flex;flex-direction:column;gap:2px}
+.nav-weergaven a{display:flex;align-items:center;gap:12px;min-height:var(--doel);padding:0 12px;border-radius:var(--straal);text-decoration:none;font-size:15px;color:var(--inkt)}
+@media (hover:hover) and (pointer:fine){.nav-weergaven a:hover{background:var(--actief)}}
+.nav-weergaven a[aria-current="page"]{background:var(--actief);font-weight:600}
+.zijbalk-tellingen h2{margin:14px 12px 2px;font-size:13px;font-weight:600;color:var(--inkt-2)}
+.tel-rij{display:grid;grid-template-columns:20px minmax(0,1fr) auto;align-items:center;gap:6px;min-height:40px;padding:0 6px;border-radius:var(--straal);font-size:13px;color:var(--inkt);line-height:1.2}
+.tel-rij .tel-nr{font-size:19px}
+.tel-rij .tel-aantal{color:var(--inkt-2);font-variant-numeric:tabular-nums}
+.tel-rij-status{min-height:30px}
+.tel-rij .status{justify-content:center}
+.zijbalk-thema{margin-top:auto;padding:14px 12px 0;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--inkt-2)}
+.thema-kort{display:none}
+
+/* ---------- Tablet: sidebar as icons, card as side panel ---------- */
+@media (min-width:760px){
+  .app{flex-direction:row;align-items:stretch}
+  .kop,.onderbalk,.meer{display:none}
+  .zijbalk{
+    display:flex;flex-direction:column;gap:6px;
+    flex:0 0 64px;width:64px;min-height:100%;min-height:100dvh;
+    position:sticky;top:0;max-height:100%;max-height:100dvh;overflow:auto;
+    padding:calc(18px + env(safe-area-inset-top)) 8px 18px calc(8px + env(safe-area-inset-left));
+    background:var(--papier);border-right:1px solid var(--lijn);
+  }
+  .zijbalk-kop,.zoek,.zijbalk-tellingen{display:none}
+  .nav-weergaven a{justify-content:center;padding:0;width:48px;height:48px}
+  .nav-tekst{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .zijbalk-thema{padding:16px 0 0;align-items:center}
+  .zijbalk-thema .schakel{flex-direction:column}
+  .zijbalk-thema .schakel button{padding:0 4px;font-size:12px;min-height:var(--doel);width:48px}
+  .zijbalk-thema .schakel button+button{border-left:0;border-top:1px solid var(--lijn-sterk)}
+  .zijbalk-thema .thema-label{display:none}
+  .zijbalk-thema .thema-kort{display:inline}
+  .zijbalk-thema .thema-lang{display:none}
+  .hoofd{padding:20px 24px 40px}
+  .weergave-uitleg{padding:0}
+  .rijen{padding:0}
+  .persoon{
+    left:auto;top:0;width:min(430px,100%);height:100%;
+    border-radius:0;border-left:1px solid var(--lijn);
+    box-shadow:-8px 0 30px rgba(0,0,0,.12);
+  }
+  .persoon-greep{display:none}
+  .persoon-kop{padding:22px 28px 0}
+  .persoon-inhoud{padding:0 28px 40px}
+}
+
+/* ---------- Laptop: full sidebar, card as right panel ---------- */
+@media (min-width:1180px){
+  .zijbalk{flex:0 1 228px;width:auto;min-width:208px;padding:26px 14px 26px calc(14px + env(safe-area-inset-left))}
+  .zijbalk-kop,.zoek,.zijbalk-tellingen{display:block}
+  .nav-weergaven a{justify-content:flex-start;padding:0 12px;width:auto;height:auto}
+  .nav-tekst{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}
+  .zijbalk-thema{padding:16px 12px 0;align-items:stretch}
+  .zijbalk-thema .schakel{flex-direction:row}
+  .zijbalk-thema .schakel button{padding:0 6px;font-size:13px;min-height:36px;flex:1 1 0;width:auto}
+  .zijbalk-thema .schakel button+button{border-top:0;border-left:1px solid var(--lijn-sterk)}
+  .zijbalk-thema .thema-label{display:block}
+  .zijbalk-thema .thema-kort{display:none}
+  .zijbalk-thema .thema-lang{display:inline}
+  .hoofd{flex:999 1 600px;padding:24px 28px 40px}
+  .persoon{
+    position:sticky;top:0;flex:1 1 430px;max-width:520px;width:auto;
+    height:100%;height:100dvh;box-shadow:none;
+  }
+  html.blad-open body{overflow:auto}
+  .scherm{display:none}
+  .sectie-kop button{font-family:var(--letter-naam);font-size:19px;font-weight:600;border-top:0;min-height:var(--doel);padding:0;margin-top:14px}
+  .sectie-pijl{display:none}
+  .secties{margin-top:0}
+  .sectie-inhoud{padding:2px 0 4px}
+}
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .persoon,.meer{transition:transform .28s var(--ease-drawer)}
+  .persoon.schuift,.meer.schuift{transform:translateY(100%);transition-duration:.2s} /* leaving is faster than entering */
+  .persoon.sleept{transition:none;will-change:transform}                              /* while dragging, the sheet follows the finger directly */
+  .scherm{transition:opacity .22s var(--ease-out)}
+  .scherm.schuift{opacity:0;pointer-events:none}
+  .nav-weergaven a,.tab,.rij,.knop,.reg-chip,.reg-optie,.fam-kaart{transition:background-color .12s,transform 160ms var(--ease-out)}
+  .tab:active,.rij:active,.knop:active,.reg-chip:active,.reg-optie:active,.fam-kaart:active{transform:scale(.97)} /* instant tap feedback */
+}
+@media (prefers-reduced-motion:no-preference) and (min-width:760px){
+  .persoon.schuift{transform:translateX(100%)}  /* tablet: side panel comes in from the right */
+}
+@media (min-width:1180px){
+  .persoon{transition:none}                     /* laptop: panel sits in the flow */
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  /* softer, not zero: fade only. Higher specificity beats the * above. */
+  .persoon,.meer,.scherm{transition:opacity .15s ease!important}
+  .persoon.schuift,.meer.schuift,.scherm.schuift{opacity:0;transform:none}
+  .scherm.schuift{pointer-events:none}
+}
+

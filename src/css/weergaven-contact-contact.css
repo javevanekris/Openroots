@@ -1,0 +1,16 @@
+/* weergaven/contact/contact.css */
+/* ui/weergaven/contact/contact.css: contact with the owner (route #contact, since version 47). Sizes like updates and progress. */
+.weergave-contact{padding:6px 20px 24px}
+.weergave-contact>*{max-width:680px}
+.ct-titel{font-size:27px;line-height:1.15}
+.ct-sub{margin-top:4px;font-size:15px;line-height:1.4}
+.ct-kaart{margin-top:16px;padding:12px 14px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot)}
+.ct-label{font-size:13px;color:var(--inkt-2)}
+.ct-mail{margin-top:2px;font-size:18px;line-height:1.4;overflow-wrap:anywhere}
+.ct-mail a,.ct-p a{color:var(--inkt)}
+.ct-h2{font-size:19px;line-height:1.25;margin:22px 0 6px}
+.ct-p{font-size:15px;line-height:1.5;margin:0 0 8px}
+.ct-lijst{margin:0 0 8px;padding-left:20px;font-size:15px;line-height:1.5}
+.ct-lijst li{margin:0 0 6px}
+@media (min-width:760px){.weergave-contact{padding:0}.ct-titel{font-size:30px}}
+

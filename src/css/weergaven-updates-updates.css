@@ -1,0 +1,18 @@
+/* weergaven/updates/updates.css */
+/* ui/weergaven/updates/updates.css: the updates per day (route #updates, since version 47). Sizes like progress. */
+.weergave-updates{padding:6px 20px 24px}
+.up-kop{max-width:780px}
+.up-titel{font-size:27px;line-height:1.15}
+.up-sub{margin-top:4px;font-size:15px;line-height:1.4}
+.up-contact{max-width:780px;margin-top:16px;padding:12px 14px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);font-size:15px;line-height:1.5}
+.up-contact a{color:var(--inkt);overflow-wrap:anywhere}
+.up-lijst{list-style:none;margin:8px 0 0;padding:0;max-width:780px}
+.up-item{padding:16px 0 4px;border-top:1px solid var(--lijn)}
+.up-item:first-child{border-top:0}
+.up-datum{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;font-size:19px;font-weight:600;line-height:1.25}
+.up-versie{font-size:14px;font-weight:400;color:var(--inkt-2)}
+.up-t{margin-top:4px;font-size:16px;font-weight:600;line-height:1.4}
+.up-punten{margin:6px 0 0;padding-left:20px;font-size:15px;line-height:1.5}
+.up-punten li{margin:0 0 6px}
+@media (min-width:760px){.weergave-updates{padding:0}.up-titel{font-size:30px}}
+

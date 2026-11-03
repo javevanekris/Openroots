@@ -1,0 +1,17 @@
+/* kinderen/kinderen.css */
+/* ui/kinderen/kinderen.css: the "Children" section on the person card (since version 46). Sizes like the timeline in context.css. */
+.kd-intro{font-size:15px;line-height:1.45;margin:0 0 6px}
+.kd-lijst{list-style:none;margin:0;padding:0}
+.kd{display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 10px;padding:9px 0;border-top:1px solid var(--lijn)}
+.kd-i{font-size:16px;line-height:1.35;color:var(--inkt-2);text-align:right}
+.kd-tekst{min-width:0}
+.kd-naam{font-family:var(--letter-naam);font-weight:600;font-size:16px;line-height:1.35;color:var(--inkt)}
+a.kd-naam{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.kd-kw{font-size:13px;color:var(--inkt-2);white-space:nowrap}
+.kd-kw .getal{font-size:15px}
+.kd-meta{display:block;font-size:14px;line-height:1.45;color:var(--inkt-2);margin-top:1px}
+.kd-meta .ctx-tag{color:var(--inkt)}
+.kd-akten{display:block;font-size:13px;line-height:1.6;color:var(--inkt-2);margin-top:2px}
+.kd-akten a{color:var(--inkt)}
+.kd-blok .ctx-src{margin-top:10px}
+

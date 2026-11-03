@@ -1,0 +1,21 @@
+{
+ "title": "Ancestor chart",
+ "owner": "Alex Example",
+ "confirmedByOwner": [
+  1,
+  2,
+  3
+ ],
+ "version": "Demo version 3 · May 2026",
+ "tagline": "A fictional demo chart. Nobody in it is real.",
+ "contact": {
+  "email": "alex@example.org",
+  "text": "This is a demo. In your own chart, say here what help you are looking for, for example photos, family stories or records."
+ },
+ "lineLabels": {
+  "4": "Paternal grandfather’s line",
+  "5": "Paternal grandmother’s line",
+  "6": "Maternal grandfather’s line",
+  "7": "Maternal grandmother’s line"
+ }
+}

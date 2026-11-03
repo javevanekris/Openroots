@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Ancestor chart</title>
+<!-- Fonts are loaded from Google Fonts. To self-host them, remove these links and add @font-face rules to the CSS. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>try{var kwT=localStorage.getItem('kw-thema');if(kwT==='donker')document.documentElement.setAttribute('data-theme','dark');else if(kwT==='licht')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" media="print" onload="this.media='all'">
+<style id="ui-css">
+{{css}}</style>
+</head>
+<body>
+<!-- UI:START -->
+<div id="app" class="app">
+<a class="spring" id="spring" href="#hoofd">Skip to content</a>
+
+<header class="kop" id="kop">
+<span class="kop-titel">Ancestor chart</span>
+<button type="button" class="kop-terug" id="kop-terug" aria-controls="meer" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>More</button>
+<a class="kop-zoek" href="#register" aria-label="Search"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
+</header>
+
+<aside class="zijbalk" id="zijbalk">
+<div class="zijbalk-kop">
+<p class="zijbalk-titel">Ancestor chart</p>
+<div id="versie-plek-zijbalk"><p class="versie">Version 1</p></div>
+</div>
+<form class="zoek" id="zoek" role="search">
+<label for="zoek-q">Search for an ancestor or place</label>
+<input id="zoek-q" type="search" placeholder="For example Anna Example" autocomplete="off" spellcheck="false">
+</form>
+<nav class="nav-weergaven" aria-label="Views">
+<a href="#boom" data-weergave="boom" title="Tree"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="16" width="6" height="5" rx="1"/><rect x="3" y="3" width="6" height="5" rx="1"/><rect x="15" y="3" width="6" height="5" rx="1"/><path d="M12 16v-4M6 8v4h12V8"/></svg><span class="nav-tekst">Tree</span></a>
+<a href="#overzicht" data-weergave="overzicht" title="Overview"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-tekst">Overview</span></a>
+<a href="#kaart" data-weergave="kaart" title="Map"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span class="nav-tekst">Map</span></a>
+<a href="#register" data-weergave="register" title="Register"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h11a1 1 0 0 1 1 1v15H7a2 2 0 0 1-2-2V5a1 1 0 0 1 1-1z"/><path d="M5 18a2 2 0 0 1 2-2h11M9 8h6M9 11h4"/></svg><span class="nav-tekst">Register</span></a>
+<a href="#voortgang" data-weergave="voortgang" title="Progress"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="nav-tekst">Progress</span></a>
+<a href="#uitleg" data-weergave="uitleg" title="Guide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span class="nav-tekst">Guide</span></a>
+<a href="#updates" data-weergave="updates" title="Updates"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="nav-tekst">Updates</span></a>
+<a href="#contact" data-weergave="contact" title="Contact"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="nav-tekst">Contact</span></a>
+</nav>
+<section class="zijbalk-tellingen" aria-labelledby="kop-lijnen">
+<h2 id="kop-lijnen">Via which grandparent</h2>
+<div id="tel-lijnen"></div>
+</section>
+<section class="zijbalk-tellingen" aria-labelledby="kop-zeker">
+<h2 id="kop-zeker">How certain</h2>
+<div id="tel-status"></div>
+</section>
+<div class="zijbalk-thema" id="thema-zijbalk"></div>
+</aside>
+
+<main class="hoofd" id="hoofd" tabindex="-1">
+<section class="weergave weergave-uitleg" id="weergave-uitleg" data-weergave="uitleg" hidden>
+<div class="panel" id="panel">
+<style>
+.panel>*{max-width:780px}
+.panel h3{font-family:"Source Serif 4",Georgia,serif;font-size:15px;color:var(--ink);margin:18px 0 4px}
+.panel p{margin:0 0 8px}
+.panel ul{margin:0 0 8px;padding-left:18px}
+.panel ul li{margin:0 0 4px}
+.panel details{margin:4px 0 10px}
+.panel summary{cursor:pointer;color:var(--ink)}
+.panel .u-ak{color:var(--stam)}
+.panel .u-ob{color:var(--stam)}
+.panel .u-vb{display:inline-block;width:14px;height:10px;border:1.5px dashed #B5523B;border-radius:2px}
+.panel .u-nb{opacity:.55;font-style:italic;font-weight:400}
+.panel .u-nw{display:inline-block;width:14px;height:4px;background:#C98A2B;vertical-align:middle}
+</style>
+<h2>Guide</h2>
+<p>This is an ancestor chart. It shows a person, their parents, their grandparents and so on, as far back as the records go. The oldest generation is at the top and the owner is at the bottom.</p>
+
+<h3>What this chart is</h3>
+<ul><li>Every ancestor has an Ahnentafel number (a "No."). It is a fixed way to number ancestors.</li><li>Person 1 is the owner of the chart. The father of person n has number 2n. The mother has number 2n + 1. Even numbers are men and odd numbers are women.</li><li>Persons 2 and 3 are the parents. Persons 4 to 7 are the grandparents. Persons 8 to 15 are the great-grandparents, and so on.</li><li>Each step back is one generation. Generation 1 is the owner. Generation 2 holds the parents. Generation n holds up to 2<sup>n-1</sup> people.</li></ul>
+
+<h3>How to read the views</h3>
+<ul><li><b>Tree.</b> Each block is a couple. The lines above lead to the parents of the father (left) and of the mother (right). Tap or click a person to open the person card. Zoom with two fingers, with ctrl and the scroll wheel, or with the − and + buttons. Fit shows the whole tree. 100% shows the true size. Flip turns the tree upside down.</li><li><b>Overview.</b> A summary of the chart at a glance.</li><li><b>Map.</b> Shows where the ancestors lived and were born. People without a known place are not on the map.</li><li><b>Register.</b> An alphabetical list of everyone. Use the search box to find an ancestor or a place.</li><li><b>Progress.</b> Counts how many ancestors are known and how certain they are, per generation and per line.</li><li><b>Updates.</b> A log of what was found and when.</li><li><b>Contact.</b> How to reach the owner, for example to share more information.</li></ul>
+<p>On a phone, Progress, Guide, Updates and Contact are under More.</p>
+
+<h3>How certain is each person?</h3>
+<p>Every person has one of four statuses. Each has its own shape and label. Colour never stands for evidence, so the chart also works in grey and for readers who do not see colour.</p>
+<ul><li><b class="u-ak">✓</b> <b>Confirmed by a record.</b> A record names the person and the link to the child. It can be a baptism, marriage or burial entry in a church book, or a civil registration record.</li><li><b class="u-ob">◆</b> <b>Supported.</b> No record says it in so many words. A sound argument from indirect evidence supports it. Nothing speaks against it. The person card gives the reasoning.</li><li><span class="u-vb"></span> <b>With reservation</b> (dashed border). The evidence fits, but other readings remain. The person card gives the reason. The person stays in the chart until something disproves it.</li><li><b class="u-nb">Grey</b> <b>Unconfirmed.</b> This is a lead only, such as another person's family tree. It does not count as proof. The same goes for the ancestors above this person.</li></ul>
+<p>The owner can confirm close family personally. These people count as confirmed even without a record. The chart marks them as such on the person card.</p>
+<p>When a record and a family tree disagree, follow the record. Remove what a source disproves. Keep what you cannot confirm yet as "With reservation" or "Unconfirmed".</p>
+
+<h3>What the symbols mean</h3>
+<ul><li><b>°</b> Born (or baptised).</li><li><b>†</b> Died (or buried).</li><li><b>⚭</b> Married.</li><li><i>≈ 1725 – ≈ 1785</i> <b>Estimated.</b> No source gives a year, so the chart shows a calculated life span. It is a working aid. It goes away as soon as a record is added.</li><li><span class="u-nw"></span> <b>New.</b> Marks something added in the latest update.</li><li>A dot after the number means the person has a note or a story.</li></ul>
+
+<h3>Records and sources</h3>
+<p>Each person has a list of records and sources on the person card. A source has a short code, such as A or OA. The codes are listed in the lists at the end of this guide. A question mark after a code means the link to this person is not certain yet.</p>
+<p>Prefer original records, such as civil registration, population registers, and baptism, marriage and burial books. Books and family trees by others are leads. Always note where each fact came from.</p>
+<h3>Records, registers and newspapers</h3>
+<ol><li>A · Example: civil registration records from a national archive (replace this line with your own source)</li><li>B · Example: church baptism, marriage and burial books from a regional archive</li></ol>
+<h3>Books, genealogies and family trees</h3>
+<ol><li>C · Example: a published family history (replace this line with your own source)</li><li>D · Example: an online family tree used as a lead</li></ol>
+<p>Edit these lists to match the source codes you use in your data files. Each line must start with a code of one or two capital letters, then " · ", then the description.</p>
+
+<h3>Getting started: add your own data</h3>
+<ol><li>Install Node 18 or later.</li><li>Copy the folder <code>data/</code>, or start from <code>examples/demo</code>.</li><li>Fill the data files. The format is in <code>docs/data-format.md</code>.</li><li>Set your title, owner and contact details in <code>data/CFG.json</code>. The values are in <code>docs/config.md</code>.</li><li>Run <code>node build.mjs</code>.</li><li>Open <code>dist/index.html</code> in a browser.</li><li>Ask an AI agent with the ancestor-research skill to help you find records. See the <code>skills/</code> folder.</li></ol>
+<p>With no data, the chart opens on this Guide.</p>
+
+<h3>Privacy</h3>
+<p>Do not publish data about living people. Leave out names, dates and places of people who may still be alive. Check the data files before you share the page.</p>
+
+<details><summary><b>Tips for good research</b></summary>
+<ul><li>Work from the newest generation to the oldest.</li><li>Check a name and a date against at least two records before you mark a person as confirmed.</li><li>Names change over time. Look for spelling variants and for patronymics.</li><li>Write down your reasoning for every "Supported" and "With reservation" person.</li></ul>
+</details>
+</div>
+</section>
+</main>
+
+<div class="scherm" id="scherm" hidden></div>
+
+<aside class="persoon" id="persoon" role="dialog" aria-modal="false" aria-label="Person card" tabindex="-1" hidden>
+<div class="persoon-greep" id="persoon-greep" aria-hidden="true"></div>
+<div class="persoon-kop">
+<span class="lijnlabel" id="persoon-lijn"></span>
+<button type="button" class="knop knop-rond" id="persoon-sluit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Close</button>
+</div>
+<div class="persoon-inhoud" id="persoon-inhoud"></div>
+</aside>
+
+<nav class="onderbalk" id="onderbalk" aria-label="Views">
+<a class="tab" href="#boom" data-weergave="boom"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="16" width="6" height="5" rx="1"/><rect x="3" y="3" width="6" height="5" rx="1"/><rect x="15" y="3" width="6" height="5" rx="1"/><path d="M12 16v-4M6 8v4h12V8"/></svg><span>Tree</span></a>
+<a class="tab" href="#overzicht" data-weergave="overzicht"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Overview</span></a>
+<a class="tab" href="#kaart" data-weergave="kaart"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span>Map</span></a>
+<a class="tab" href="#register" data-weergave="register"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h11a1 1 0 0 1 1 1v15H7a2 2 0 0 1-2-2V5a1 1 0 0 1 1-1z"/><path d="M5 18a2 2 0 0 1 2-2h11M9 8h6M9 11h4"/></svg><span>Register</span></a>
+<button type="button" class="tab" id="meer-knop" aria-expanded="false" aria-controls="meer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg><span>More</span></button>
+</nav>
+
+<div class="meer" id="meer" role="dialog" aria-modal="true" aria-labelledby="meer-titel" tabindex="-1" hidden>
+<div class="persoon-greep" aria-hidden="true"></div>
+<div class="meer-kop">
+<h2 id="meer-titel">More</h2>
+<button type="button" class="knop knop-rond" id="meer-sluit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Close</button>
+</div>
+<nav class="meer-lijst" aria-label="More views">
+<a href="#voortgang" data-weergave="voortgang"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span><span class="meer-naam">Progress</span><span class="meer-bij" id="meer-bij-voortgang">How many ancestors there are, and how certain</span></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+<a href="#uitleg" data-weergave="uitleg"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span><span class="meer-naam">Guide</span><span class="meer-bij">How to read the tree, how certain it is, the sources</span></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+<a href="#updates" data-weergave="updates"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><span class="meer-naam">Updates</span><span class="meer-bij">What was found, by date</span></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+<a href="#contact" data-weergave="contact"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><span class="meer-naam">Contact</span><span class="meer-bij">Do you know more? Get in touch</span></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+</nav>
+<div class="meer-thema" id="thema-meer"></div>
+<div class="meer-versie" id="versie-plek-meer"></div>
+</div>
+</div>
+<!-- UI:EINDE -->
+<script id="data">
+{{data}}</script>
+<script id="ui-js">
+{{js}}</script>
+</body>
+</html>

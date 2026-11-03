@@ -1,0 +1,95 @@
+/* tokens.css */
+/* ui/tokens.css: the colours and fonts of direction A (Register) as custom properties.
+   Light is the lead (from the mockups). Dark comes from the visual designer's dark tokens file (contrast measured, see the README there).
+   Colour says via which grandparent someone is related to the owner (--lijn-4 … --lijn-7). Shape says how certain it is. Colour never means evidence. */
+:root{
+  color-scheme:light;
+  --ondergrond:#F5F5F2;      /* page */
+  --papier:#FFFFFF;          /* cards, panels, bottom bar */
+  --inkt:#1B2230;            /* text, status shapes */
+  --inkt-2:#4A5260;          /* secondary text */
+  --inkt-3:#646B77;          /* grey italic name (unconfirmed), internal references; 4.5:1 on paper */
+  --lijn:#D9DBE0;            /* dividers, borders */
+  --lijn-sterk:#8A919B;      /* borders of input fields and buttons; 3:1 on paper */
+  --verbinding:#AEB3BB;      /* lines between generations (tree, later) */
+  --tak:#858C96;             /* branches of the tree; 3.1:1 on the background */
+  --actief:#E7E9ED;          /* active navigation */
+  --bewijsvlak:#EEF0F2;      /* status strip on the person card */
+  --greep:#8A919B;           /* drag handle of the bottom sheet; 3.2:1 on paper (review H3) */
+  --scherm:rgba(27,34,48,.6); /* behind a sheet or side panel; the mockup has opaque #73777F, here translucent so you see where you came from (review L1) */
+  --lijn-4:#A3391F;          /* paternal grandfather's line (No. 4) */
+  --lijn-5:#8C6100;          /* paternal grandmother's line (No. 5) */
+  --lijn-6:#1E6873;          /* maternal grandfather's line (No. 6) */
+  --lijn-7:#5C3F8C;          /* maternal grandmother's line (No. 7) */
+  --focus:#1E6873;
+  --kaart-4:#C4512F;         /* map variants: only for areas on the map, never for text (lightness 49/59/40/22) */
+  --kaart-5:#B8860B;
+  --kaart-6:#1E6873;
+  --kaart-7:#3D2A66;
+  --op-kaart-5:#1B2230;      /* digits on a gold dot (--kaart-5): 4.9:1; white only reaches 3.3:1 there */
+
+  --letter-tekst:"Atkinson Hyperlegible Next","Segoe UI",system-ui,-apple-system,sans-serif;
+  --letter-naam:Spectral,Georgia,"Times New Roman",serif;
+
+  --straal:10px;
+  --straal-groot:12px;
+  --doel:44px;               /* minimum size of a touch target */
+  --ease-out:cubic-bezier(0.23,1,0.32,1);      /* strong ease-out for the UI */
+  --ease-drawer:cubic-bezier(0.32,0.72,0,1);   /* bottom sheet, iOS-like */
+
+  /* The guide (#panel) has its own style block from version 43 that uses these names. */
+  --ink:var(--inkt);
+  --stam:var(--inkt);
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ondergrond:#16191E;
+    --papier:#1F232A;
+    --inkt:#ECEDEF;
+    --inkt-2:#A9B0BA;
+    --inkt-3:#9AA0AA;
+    --lijn:#343A44;
+    --lijn-sterk:#6B7482;    /* 3.3:1 on dark paper (review M10) */
+    --verbinding:#5A626E;
+    --tak:#6B7482;
+    --actief:#2C323B;
+    --bewijsvlak:#272C34;
+    --greep:#6B7482;
+    --scherm:rgba(0,0,0,.65);
+    --lijn-4:#E8855F;
+    --lijn-5:#D9A53A;
+    --lijn-6:#5FB3BF;
+    --lijn-7:#B39BE0;
+    --focus:#5FB3BF;
+    --kaart-4:#E8855F;--kaart-5:#D9A53A;--kaart-6:#5FB3BF;--kaart-7:#B39BE0;
+    --op-kaart-5:#1F232A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ondergrond:#16191E;
+  --papier:#1F232A;
+  --inkt:#ECEDEF;
+  --inkt-2:#A9B0BA;
+  --inkt-3:#9AA0AA;
+  --lijn:#343A44;
+  --lijn-sterk:#6B7482;
+  --verbinding:#5A626E;
+  --tak:#6B7482;
+  --actief:#2C323B;
+  --bewijsvlak:#272C34;
+  --greep:#6B7482;
+  --scherm:rgba(0,0,0,.65);
+  --lijn-4:#E8855F;
+  --lijn-5:#D9A53A;
+  --lijn-6:#5FB3BF;
+  --lijn-7:#B39BE0;
+  --focus:#5FB3BF;
+  --kaart-4:#E8855F;--kaart-5:#D9A53A;--kaart-6:#5FB3BF;--kaart-7:#B39BE0;
+  --op-kaart-5:#1F232A;
+}
+
+body{background:var(--ondergrond);color:var(--inkt)}
+

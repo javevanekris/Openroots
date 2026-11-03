@@ -1,0 +1,59 @@
+/* weergaven/uitleg/uitleg.css */
+/* ui/weergaven/uitleg/uitleg.css: the guide as a reading page, after the design files (guide phone and laptop).
+   The content of #panel does not change and no element is added. #panel brings its own <style> from version 43 (.panel …),
+   which sits in the body and so beats equal selectors in the head; that is why .weergave-uitleg .panel is put in front of everything here,
+   so it wins without !important. The h3 rules in basis.css already have the sizes of the mockup. */
+.weergave-uitleg{padding:4px 20px 24px}
+.weergave-uitleg .panel{max-width:780px;margin:0;font-size:16px;line-height:1.55;color:var(--inkt)}
+.weergave-uitleg .panel>*{max-width:none}
+.weergave-uitleg .panel h2{font-family:var(--letter-naam);font-weight:600;font-size:24px;line-height:1.2;margin:28px 0 8px;color:var(--inkt)}
+.weergave-uitleg .panel h2:first-of-type{font-size:27px;line-height:1.15;margin:0 0 8px}
+.weergave-uitleg .panel h3{line-height:1.25}
+.weergave-uitleg .panel p{margin:0 0 10px}
+.weergave-uitleg .panel ul{margin:0 0 12px;padding-left:22px}
+.weergave-uitleg .panel ul li{margin:0 0 6px}
+.weergave-uitleg .panel a{color:var(--inkt)}
+.weergave-uitleg .panel i{font-family:var(--letter-naam)}
+
+/* The two source lists as rows with the letter on the left. The line is a single text (“OA · …”), so the letter sits in a hanging
+   indent: the first line starts on the left with the letter, the following lines are indented. */
+.weergave-uitleg .panel ol{list-style:none;margin:0 0 12px;padding:0}
+.weergave-uitleg .panel ol li{margin:0;padding:8px 0;text-indent:0;border-top:1px solid var(--lijn);font-size:15px;line-height:1.45}
+.weergave-uitleg .panel ol li:last-child{border-bottom:1px solid var(--lijn)}
+
+/* The status signs in “How certain is it?”: the same shapes as kern.statusIcoon() in the register, sidebar and person card
+   (check mark, diamond, fine dotted circle), in ink colour. CSS only: the letter sign (✓, ◆) stays in the text, at 0 px. */
+.weergave-uitleg .panel .u-ak,.weergave-uitleg .panel .u-ob,.weergave-uitleg .panel .u-vb{display:inline-block;box-sizing:border-box;width:18px;height:18px;vertical-align:-3px;border:0;border-radius:0;font-size:0;line-height:0;overflow:hidden;color:var(--inkt);background:var(--inkt);-webkit-mask:var(--u-icoon) center/contain no-repeat;mask:var(--u-icoon) center/contain no-repeat}
+.weergave-uitleg .panel .u-ak{--u-icoon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5 9.5 17.5 19.5 6.5'/%3E%3C/svg%3E")}
+.weergave-uitleg .panel .u-ob{--u-icoon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 22 12 12 22 2 12z'/%3E%3C/svg%3E");-webkit-mask-size:72%;mask-size:72%}
+.weergave-uitleg .panel .u-vb{--u-icoon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-dasharray='3.2 3'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3C/svg%3E")}
+.weergave-uitleg .panel .u-nb{opacity:1;font-family:var(--letter-naam);font-style:italic;font-weight:400;color:var(--inkt-3)}
+.weergave-uitleg .panel .u-nw{background:var(--lijn-sterk)}
+
+/* “Important corrections”: 52 px expand button with an arrow, closed on load. */
+.weergave-uitleg .panel details{margin:8px 0 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+.weergave-uitleg .panel summary{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;padding:0 4px;
+  cursor:pointer;color:var(--inkt);font-size:16px;font-weight:600;list-style:none;
+}
+.weergave-uitleg .panel summary::-webkit-details-marker{display:none}
+.weergave-uitleg .panel summary::after{
+  content:"";flex:0 0 auto;width:20px;height:20px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.weergave-uitleg .panel details[open]>summary::after{transform:rotate(90deg)}
+.weergave-uitleg .panel summary:focus-visible{outline-offset:-2px}
+.weergave-uitleg .panel details>ul{margin-top:10px}
+@media (prefers-reduced-motion:no-preference){
+  .weergave-uitleg .panel summary::after{transition:transform .15s}
+}
+
+@media (min-width:760px){
+  .weergave-uitleg{padding:0}
+  .weergave-uitleg .panel ol li{padding-left:40px;text-indent:-40px}
+}
+@media (min-width:1180px){
+  .weergave-uitleg .panel h2:first-of-type{font-size:30px}
+}
+

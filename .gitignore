@@ -1,0 +1,19 @@
+# Generated
+dist/
+node_modules/
+
+# Your own chart. Never commit real family data to a public repository.
+my-data/
+*-private/
+private/
+*.private.json
+.env
+
+# Editors and systems
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Agent research output (a research log may name real people)
+research/

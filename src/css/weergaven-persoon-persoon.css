@@ -1,0 +1,73 @@
+/* weergaven/persoon/persoon.css */
+/* ui/weergaven/persoon/persoon.css: the content of the person card. The placement (bottom sheet, side panel, right panel) is in basis.css. */
+.persoon-titel{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:start;margin-top:14px}
+.persoon-nr{font-size:46px;line-height:.95}
+.persoon-nr.nr-lang{font-size:38px}
+.persoon-nr.nr-zeer-lang{font-size:30px}
+.persoon-titel h1{font-size:28px;line-height:1.15;text-wrap:pretty}
+.persoon-titel .bijtekst{margin-top:6px;font-size:15px}
+
+.bewijsstrook{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.bewijs{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--straal-groot);background:var(--bewijsvlak);font-size:15px;line-height:1.45}
+.bewijs .status{width:18px;height:18px;margin-top:2px}
+.bewijs b{font-weight:600}
+
+.levensloop{display:grid;grid-template-columns:minmax(52px,auto) minmax(0,1fr);gap:10px 12px;margin:20px 0 0}
+.levensloop>div{display:contents}
+.levensloop dt{font-size:20px;color:var(--inkt-2);line-height:1.3;white-space:nowrap}
+.levensloop dt.label{font-family:var(--letter-tekst);font-size:14px;line-height:1.6}
+.levensloop dd{font-size:16px;line-height:1.45}
+.rest{color:var(--inkt-2)}
+
+.kaart-h2{font-family:var(--letter-naam);font-weight:600;font-size:19px;margin:24px 0 6px}
+.kaart-h2-familie{margin:14px 0 8px}
+.verhaal{font-family:var(--letter-naam);font-size:17px;line-height:1.55;text-wrap:pretty;white-space:pre-line}
+.lees-verhaal{min-height:var(--doel);padding:0;font-size:15px}
+
+.familie{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.fam-kaart{display:flex;flex-direction:column;gap:2px;min-height:var(--doel);padding:10px 12px;border:1px solid var(--lijn);border-radius:var(--straal-groot);text-decoration:none;color:var(--inkt);background:var(--papier)}
+@media (hover:hover) and (pointer:fine){a.fam-kaart:hover{background:var(--actief)}}
+.fam-leeg{border-style:dashed;color:var(--inkt-2)}
+.fam-label{font-size:13px;color:var(--inkt-2)}
+.fam-naam{font-family:var(--letter-naam);font-weight:600;font-size:16px;line-height:1.25}
+.fam-leeg .fam-naam{font-weight:400;font-style:italic}
+.fam-meta{font-size:13px;color:var(--inkt-2)}
+.fam-meta .getal{font-size:15px}
+.fam-ouders{grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:10px;background:transparent;font-size:14px;line-height:1.45;color:var(--inkt-2)}
+.fam-ouders svg{flex:0 0 auto}
+
+.secties{margin-top:16px}
+.sectie-kop{margin:0}
+.sectie-kop button{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:52px;padding:0 4px;
+  border:0;border-top:1px solid var(--lijn);background:transparent;color:var(--inkt);font-size:16px;font-weight:600;text-align:left;
+}
+.sectie-kop button:focus-visible{outline-offset:-2px}
+.sectie-titel{display:flex;gap:8px;align-items:baseline}
+.sectie-aantal{color:var(--inkt-2);font-weight:400}
+.sectie-pijl{flex:0 0 auto;transition:transform .15s}
+.sectie-kop button[aria-expanded="true"] .sectie-pijl{transform:rotate(90deg)}
+.sectie-inhoud{padding:2px 4px 14px}
+.sectie-inhoud[hidden]{display:none}
+
+.bronlijst{list-style:none;margin:0;padding:0}
+.bronlijst li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:7px 0;border-top:1px solid var(--lijn)}
+.bronlijst li:first-child{border-top:0}
+.bronlijst .jaar{font-size:16px;color:var(--inkt-2)}
+.bronlijst a{font-size:15px;overflow-wrap:anywhere}
+.intern{color:var(--inkt-3);font-size:13px}
+.bron-kop{margin:14px 0 4px;font-size:13px;color:var(--inkt-2)}
+.bronnen{list-style:none;margin:0;padding:0;font-size:13px;line-height:1.5;color:var(--inkt-2)}
+.bronnen li{margin:0 0 4px}
+.bronnen b{color:var(--inkt);font-weight:600}
+.notitie{font-size:15px;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere}
+.sig{font-size:15px;line-height:1.5}
+.fotos{display:flex;flex-direction:column;gap:14px}
+.fotos figure{margin:0}
+.fotos img{width:100%;max-width:100%;height:auto;border-radius:var(--straal);background:var(--bewijsvlak)}
+.fotos figcaption{margin-top:6px;font-size:13px;line-height:1.45;color:var(--inkt-2)}
+
+@media (min-width:1180px){
+  .persoon-titel{margin-top:14px}
+}
+

@@ -1,0 +1,59 @@
+{
+  "schema": "openroots.findings/1",
+  "question": "Who were the parents of Anna Voorbeeld, born about 1851 in Voorbeeldstad?",
+  "created": "2026-11-03",
+  "researcher": "example",
+  "subjects": [
+    { "id": "p:5", "ahnentafel": 5, "label": "Anna Voorbeeld", "deceased": true },
+    { "id": "tmp:1", "ahnentafel": null, "label": "Pieter Voorbeeld, possible father", "deceased": true }
+  ],
+  "claims": [
+    {
+      "id": "c1",
+      "subject": "p:5",
+      "field": "birth.date",
+      "value": "1851-03-14",
+      "confidence": "confirmed",
+      "evidence_type": "direct",
+      "sources": ["s1"],
+      "reasoning": "The birth record states the date and names both parents. The informant was the father.",
+      "public": true
+    },
+    {
+      "id": "c2",
+      "subject": "p:5",
+      "field": "parent.father",
+      "value": "tmp:1",
+      "confidence": "confirmed",
+      "evidence_type": "direct",
+      "sources": ["s1"],
+      "reasoning": "The birth record names the father and the father declared the birth.",
+      "public": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "s1",
+      "citation": "Example Archive, civil registration births, Voorbeeldstad, record 123, 1851",
+      "url": "https://example.org/records/123",
+      "retrieved": "2026-11-03",
+      "repository": "Example Archive",
+      "excerpt": "Fictional example: a child named Anna, born 14 May 1842, to Pieter Voorbeeld and Maria Voorbeeld.",
+      "source_type": "original",
+      "information_type": "primary",
+      "supplied_by_user": false
+    }
+  ],
+  "conflicts": [],
+  "negative_searches": [
+    {
+      "source": "Example Archive church books",
+      "query": "Voorbeeld 1849-1853",
+      "variants": ["Voorbeeld", "Voorbeelt"],
+      "period": "1849-1853",
+      "expected_because": "Baptisms were recorded for the parish in these years.",
+      "date": "2026-11-03"
+    }
+  ],
+  "leads": []
+}

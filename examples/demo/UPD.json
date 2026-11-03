@@ -1,0 +1,38 @@
+[
+ {
+  "d": "2026-11-03",
+  "v": "3",
+  "t": "Map, records and children added",
+  "p": [
+   "The Map view now shows the invented region of Greenmere with 14 invented places.",
+   "Children are listed for most couples from generation 2 to generation 6.",
+   "Two drawn placeholder photos were added to the person cards of Nos. 4 and 8."
+  ]
+ },
+ {
+  "d": "2026-10-20",
+  "v": "2",
+  "t": "Generations 6 to 8 extended",
+  "p": [
+   "Added 24 people in generation 6, 28 in generation 7 and 22 in generation 8.",
+   "Five people are marked with reservation and six are unconfirmed, so the demo shows every status."
+  ]
+ },
+ {
+  "d": "2026-10-05",
+  "v": "1",
+  "t": "First version of the demo chart",
+  "p": [
+   "Generations 1 to 5 are complete: 31 people.",
+   "All names, places and links in this demo are invented."
+  ]
+ },
+ {
+  "d": null,
+  "v": "",
+  "t": "Between 1 and 4 October: collecting the first records",
+  "p": [
+   "Looked for records of the grandparents (Nos. 4 to 7) first."
+  ]
+ }
+]

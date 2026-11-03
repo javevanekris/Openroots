@@ -1,0 +1,80 @@
+/* context/context.css */
+/* ui/context/context.css: the context sections of the person card (timeline, occupation, addresses, physical description, writing,
+   money, archive). Sizes from the design files (rows with an 86 px year + text, 9 px above and below,
+   line --lijn). Colours only through the tokens; an illness wave gets a chip with text and a small symbol, not colour alone. */
+.ctx{font-size:15px;line-height:1.45;color:var(--inkt);overflow-wrap:anywhere}
+.ctx p{margin:0 0 6px}
+.ctx p:last-child{margin-bottom:0}
+.ctx b{font-weight:600}
+.ctx-sub{font-size:14px;line-height:1.5;color:var(--inkt-2);margin:0 0 8px}
+
+/* Source, reservation, chips */
+.ctx-src{font-size:13px;line-height:1.6;color:var(--inkt-2);margin:4px 0 0}
+.ctx-src a{color:var(--inkt)}
+.ctx-vb{display:inline-block;font-size:12.5px;line-height:1.5;color:var(--inkt-2);border:1px dashed var(--inkt-2);border-radius:5px;padding:0 5px;white-space:nowrap;vertical-align:1px}
+.ctx-vbr{font-size:13px;line-height:1.5;color:var(--inkt-2);font-style:italic;margin:2px 0 4px}
+.ctx-tag{display:inline-block;font-size:12.5px;line-height:1.5;padding:0 6px;border-radius:5px;border:1px solid var(--lijn);color:var(--inkt-2);white-space:nowrap;vertical-align:1px}
+.ctx-tag.r{border-color:var(--lijn-sterk)}
+.ctx-tag.z{display:inline-flex;align-items:center;gap:4px;color:var(--inkt);background:var(--bewijsvlak);border-color:var(--lijn-sterk);font-weight:600;vertical-align:0}
+.ctx-tag.z svg{flex:0 0 auto}
+
+/* Expandable lines: "Read more", "More from this period (n)", "n more addresses" */
+.ctx details>summary{cursor:pointer;list-style:none}
+.ctx details>summary::-webkit-details-marker{display:none}
+.ctx-more{margin:4px 0 0}
+.ctx-more>summary,.ctx-lees>summary{display:inline-flex;align-items:center;min-height:var(--doel);font-size:15px;color:var(--inkt);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+@media (hover:hover) and (pointer:fine){.ctx-more>summary:hover,.ctx-lees>summary:hover{color:var(--inkt-2)}}
+.ctx-lees{margin:0 0 4px}
+.ctx-lees-inhoud{padding-bottom:4px}
+.ctx-pijl{flex:0 0 auto;color:var(--inkt-2);margin-top:1px}
+.ctx details[open]>summary .ctx-pijl{transform:rotate(90deg)}
+
+/* Timeline: year (Spectral), title with age in secondary text, chips; the text behind it expands */
+.ctx-tl{list-style:none;margin:0;padding:0}
+.ctx-tl>li{border-top:1px solid var(--lijn)}
+.ctx-tl summary{display:grid;grid-template-columns:86px minmax(0,1fr) 20px;gap:0 10px;align-items:start;min-height:var(--doel);padding:9px 0}
+.ctx-y{font-size:16px;line-height:1.4;color:var(--inkt-2);white-space:nowrap}
+.ctx-t{min-width:0;font-size:15px;line-height:1.4}
+.ctx-age{color:var(--inkt-2)}
+.ctx-tx{padding:0 0 12px 96px}
+.ctx-tx p{font-size:15px;line-height:1.5}
+
+/* Occupation: the term as subheading (Spectral), then the explanation */
+.ctx-beroep+.ctx-beroep{margin-top:14px;padding-top:12px;border-top:1px solid var(--lijn)}
+.ctx-term{font-size:17px;line-height:1.3;margin:0 0 4px}
+.ctx-op{font-family:var(--letter-tekst);font-weight:400;font-size:14px;color:var(--inkt-2)}
+
+/* Addresses: year, address, note and place as secondary text, map link and source */
+.ctx-adr{list-style:none;margin:0;padding:0}
+.ctx-adr li{display:grid;grid-template-columns:86px minmax(0,1fr);gap:0 10px;padding:9px 0;border-top:1px solid var(--lijn)}
+.ctx-adr-tekst{min-width:0}
+.ctx-adres{display:block;font-size:15px;line-height:1.4}
+.ctx-adr-bij{display:block;font-size:13px;line-height:1.45;color:var(--inkt-2)}
+.ctx-adr .ctx-vbr{margin:2px 0 0}
+.ctx-maps{margin:0}
+.ctx-map{display:inline-flex;align-items:center;min-height:var(--doel);font-size:14px}
+.ctx-note{font-size:13px;line-height:1.5;color:var(--inkt-2);margin:8px 0 0}
+
+/* Physical description, writing, money, archive */
+.ctx-sig{font-size:15px;line-height:1.5}
+.ctx-geld{background:var(--bewijsvlak);border-radius:var(--straal);padding:10px 12px;margin:0 0 8px}
+.ctx-geld:last-child{margin-bottom:0}
+.ctx-meth{font-size:14px;line-height:1.5;color:var(--inkt-2)}
+.ctx-meth b{color:var(--inkt)}
+.ctx-x{margin:0;padding-left:18px}
+.ctx-x li{margin:0 0 8px}
+.ctx-x li:last-child{margin-bottom:0}
+
+/* Phone: the explanation under a timeline line, over the full width */
+@media (max-width:759px){
+  .ctx-tx{padding-left:0}
+  .ctx-tl summary{grid-template-columns:64px minmax(0,1fr) 20px}
+  .ctx-adr li{grid-template-columns:64px minmax(0,1fr)}
+  .ctx-y{white-space:normal}
+  .ctx-tag:not(.z){display:inline;padding:0;border:0;font-size:inherit;line-height:inherit;vertical-align:baseline;color:var(--inkt-2)}
+  .ctx-tag:not(.z)::before{content:"· "}
+}
+@media (prefers-reduced-motion:no-preference){
+  .ctx-pijl{transition:transform .15s}
+}
+

@@ -1,0 +1,50 @@
+/* weergaven/voortgang/voortgang.css */
+/* ui/weergaven/voortgang/voortgang.css: the progress in numbers. Sizes from the design files (progress phone and laptop):
+   rows 28 px icon | text with 10 px bar | 56 px number, cards in two columns,
+   on the laptop two columns of at most 1040 px. Colours only through the tokens. */
+.weergave-voortgang{padding:6px 20px 24px}
+.vg-titel{font-size:27px;line-height:1.15;text-wrap:pretty}
+.vg-sub{margin-top:4px;font-size:15px;line-height:1.4}
+
+.vg-groot{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:start;margin-top:14px}
+.vg-getal{font-size:56px;line-height:.9}
+.vg-groot p{margin-top:2px;font-size:15px;line-height:1.45}
+
+.vg-blok{margin-top:22px}
+.vg-h2{font-size:19px;margin-bottom:6px}
+.vg-lijst{list-style:none;margin:0;padding:0}
+.vg-rij{display:grid;grid-template-columns:28px minmax(0,1fr) 56px;column-gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--lijn)}
+.vg-icoon{justify-content:center}
+.vg-midden{min-width:0}
+.vg-label{display:block;font-size:15px;line-height:1.3}
+.vg-label .getal{font-size:17px}
+.vg-pct{color:var(--inkt-2);font-size:13px}
+.vg-spoor{display:block;margin-top:5px}
+.vg-staaf{display:block;height:10px;min-width:2px;border-radius:3px;background:var(--inkt)}
+.vg-aantal{font-size:20px;text-align:right}
+.vg-noot{margin-top:8px;font-size:13px;line-height:1.5}
+
+.vg-zin{font-size:15px;line-height:1.5}
+.vg-zin b{font-size:22px;font-weight:600;line-height:0}
+.vg-blok-open .vg-lijst{margin-top:8px}
+
+.vg-kaarten{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.vg-kaart{display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot)}
+.vg-kaart-label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--inkt-2)}
+.vg-kaart-label svg{flex:0 0 auto}
+.vg-kaart-getal{font-size:24px}
+
+.vg-versie{margin-top:24px;padding-top:12px;border-top:1px solid var(--lijn);font-size:13px;line-height:1.5}
+
+@media (min-width:760px){
+  .weergave-voortgang{padding:0;max-width:720px}
+  .vg-sub{margin-bottom:18px}
+  .vg-groot{margin-top:0}
+}
+@media (min-width:1180px){
+  .weergave-voortgang{max-width:none}
+  .vg-titel{font-size:30px}
+  .vg-kolommen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;max-width:1040px}
+  .vg-blok-open{margin-top:0}
+}
+

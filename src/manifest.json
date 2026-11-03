@@ -1,0 +1,60 @@
+{
+  "css": [
+    "tokens.css",
+    "basis.css",
+    "context-context.css",
+    "kinderen-kinderen.css",
+    "weergaven-boom-boom.css",
+    "weergaven-persoon-persoon.css",
+    "weergaven-register-register.css",
+    "weergaven-overzicht-overzicht.css",
+    "weergaven-voortgang-voortgang.css",
+    "weergaven-uitleg-uitleg.css",
+    "weergaven-updates-updates.css",
+    "weergaven-contact-contact.css",
+    "kaart-kaart.css"
+  ],
+  "js": [
+    "kern.js",
+    "context-context.js",
+    "kinderen-kinderen.js",
+    "weergaven-boom-boom.js",
+    "weergaven-persoon-persoon.js",
+    "weergaven-register-register.js",
+    "weergaven-overzicht-telling.js",
+    "weergaven-overzicht-overzicht.js",
+    "weergaven-voortgang-voortgang.js",
+    "weergaven-updates-updates.js",
+    "weergaven-contact-contact.js",
+    "kaart-kaart.js"
+  ],
+  "data": [
+    "CFG",
+    "P",
+    "M",
+    "SRC",
+    "NEW",
+    "NOTE",
+    "AKTE",
+    "VB",
+    "SIG",
+    "KRANT",
+    "VERHAAL",
+    "EST",
+    "FOTO",
+    "NB",
+    "OB",
+    "GEN",
+    "C",
+    "B",
+    "PL",
+    "KIND",
+    "UPD"
+  ],
+  "sets": [
+    "NEW",
+    "VB",
+    "NB",
+    "OB"
+  ]
+}

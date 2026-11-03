@@ -1,0 +1,212 @@
+{
+ "land": "M60 80L140 40L260 50L340 90L360 180L330 260L360 340L300 400L200 390L120 410L70 340L90 260L50 180Z",
+ "nb": "M350 120L440 100L450 300L380 330L350 260L370 180Z",
+ "enc": "M180 200L220 190L240 220L210 245L180 230Z",
+ "lg": "",
+ "bin": "M60 190L200 200L350 190M120 330L250 300L340 300",
+ "nl": [
+  20,
+  20,
+  380,
+  420
+ ],
+ "box": [
+  10,
+  10,
+  460,
+  440
+ ],
+ "lbl": [
+  {
+   "t": "Northern Sea",
+   "x": 200,
+   "y": 22,
+   "s": "w",
+   "f": 14
+  },
+  {
+   "t": "Glass Lake",
+   "x": 210,
+   "y": 222,
+   "s": "w",
+   "f": 11
+  },
+  {
+   "t": "GREENMERE",
+   "x": 200,
+   "y": 300,
+   "s": "l",
+   "f": 10
+  },
+  {
+   "t": "WESTMARK",
+   "x": 405,
+   "y": 140,
+   "s": "l",
+   "f": 10
+  }
+ ],
+ "reg": {
+  "Northvale": [
+   52.6833,
+   53.1833,
+   4.3424,
+   6.2459
+  ],
+  "Eastmarch": [
+   52.0722,
+   52.7944,
+   5.5661,
+   6.5178
+  ],
+  "Southfen": [
+   51.3778,
+   51.9889,
+   4.0705,
+   5.8833
+  ]
+ },
+ "pl": {
+  "Millbrook": {
+   "x": 190,
+   "y": 110,
+   "prov": "Northvale County",
+   "kort": "Millbrook",
+   "gem": "Millbrook Parish",
+   "vs": 0,
+   "reg": "Northvale"
+  },
+  "Ashgrove": {
+   "x": 250,
+   "y": 100,
+   "prov": "Northvale County",
+   "kort": "Ashgrove",
+   "gem": "Ashgrove Parish",
+   "vs": 0,
+   "reg": "Northvale"
+  },
+  "Redfield Cross": {
+   "x": 140,
+   "y": 130,
+   "prov": "Northvale County",
+   "kort": "Redfield Cross",
+   "gem": "Redfield Parish",
+   "vs": 0,
+   "reg": "Northvale"
+  },
+  "Hollowfield": {
+   "x": 300,
+   "y": 140,
+   "prov": "Northvale County",
+   "kort": "Hollowfield",
+   "gem": "Hollowfield Parish",
+   "vs": 0,
+   "reg": "Northvale"
+  },
+  "Larkmoor": {
+   "x": 300,
+   "y": 205,
+   "prov": "Eastmarch County",
+   "kort": "Larkmoor",
+   "gem": "Larkmoor Parish",
+   "vs": 0,
+   "reg": "Eastmarch"
+  },
+  "Greywater": {
+   "x": 275,
+   "y": 250,
+   "prov": "Eastmarch County",
+   "kort": "Greywater",
+   "gem": "Greywater Parish",
+   "vs": 0,
+   "reg": "Eastmarch"
+  },
+  "Brindle Ford": {
+   "x": 315,
+   "y": 170,
+   "prov": "Eastmarch County",
+   "kort": "Brindle Ford",
+   "gem": "Brindle Parish",
+   "vs": 0,
+   "reg": "Eastmarch"
+  },
+  "Copperfield": {
+   "x": 330,
+   "y": 235,
+   "prov": "Eastmarch County",
+   "kort": "Copperfield",
+   "gem": "Copperfield Parish",
+   "vs": 0,
+   "reg": "Eastmarch"
+  },
+  "Saltmarsh Quay": {
+   "x": 200,
+   "y": 375,
+   "prov": "Southfen County",
+   "kort": "Saltmarsh Quay",
+   "gem": "Saltmarsh Parish",
+   "vs": 1,
+   "reg": "Southfen"
+  },
+  "Fernhollow": {
+   "x": 140,
+   "y": 360,
+   "prov": "Southfen County",
+   "kort": "Fernhollow",
+   "gem": "Fernhollow Parish",
+   "vs": 0,
+   "reg": "Southfen"
+  },
+  "Kestrel Rise": {
+   "x": 260,
+   "y": 350,
+   "prov": "Southfen County",
+   "kort": "Kestrel Rise",
+   "gem": "Kestrel Parish",
+   "vs": 0,
+   "reg": "Southfen"
+  },
+  "Tidewell": {
+   "x": 110,
+   "y": 315,
+   "prov": "Southfen County",
+   "kort": "Tidewell",
+   "gem": "Tidewell Parish",
+   "vs": 1,
+   "reg": "Southfen"
+  },
+  "Wren's End": {
+   "x": 95,
+   "y": 200,
+   "prov": "Wren County",
+   "kort": "Wren's End",
+   "gem": "Wren Parish",
+   "vs": 0
+  },
+  "Oldmarket": {
+   "x": 410,
+   "y": 200,
+   "prov": "Oldmarket Province",
+   "kort": "Oldmarket",
+   "gem": "Oldmarket District",
+   "vs": 0,
+   "land": "Westmark"
+  }
+ },
+ "genjaar": {
+  "4": 1900,
+  "5": 1871,
+  "6": 1841,
+  "7": 1808,
+  "8": 1779
+ },
+ "tot": {
+  "alle": 98,
+  "plaats": 91
+ },
+ "verschoven": [
+  "Saltmarsh Quay",
+  "Tidewell"
+ ],
+ "km": 0.6177
+}

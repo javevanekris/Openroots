@@ -1,0 +1,324 @@
+/* kaart/kaart.css */
+/* ui/kaart/kaart.css: the origin map in the tokens of direction A. Land --papier, water --ondergrond, neighbouring countries
+   --bewijsvlak, borders --lijn; dots in the map variants --kaart-4 … --kaart-7 (fills only), text and numbers
+   in the normal line colours. Sizes from the design files (map). All classes start with km-. */
+
+/* ---------- placement of the view: phone fixed under the heading, tablet and laptop the whole main column ---------- */
+.weergave-kaart{position:fixed;left:0;right:0;top:calc(54px + env(safe-area-inset-top));bottom:0;z-index:5;padding:0;min-width:0}
+/* Phone: an open sheet (place, search and filters, legend) lies over the bottom bar, like the person card and the mockup
+   for the phone place sheet. The view is its own stacking layer (position:fixed); it then goes above the bottom bar (20)
+   and stays below the scrim (30) and the person card (40). .km has no background of its own, so the strip under the chips
+   shows the bottom bar while the sheet is still sliding in. */
+@media (max-width:759px){
+  .weergave-kaart.km-blad-open{z-index:25}
+  html.km-blad-open .onderbalk{visibility:hidden;transition:visibility 0s .22s} /* only once the sheet has slid in */
+}
+.weergave-kaart[hidden]{display:none}
+.km{display:flex;flex-direction:column;height:100%;min-height:0}
+/* Base only (:where does not count): the font size of chips, map buttons and rows in their own class wins. */
+:where(.km) button{font:inherit;color:inherit}
+.km :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* The sheet gets focus programmatically on opening (for screen readers); no ring around the whole sheet, like .persoon. */
+.km .km-blad:focus{outline:none}
+
+/* ---------- the stage with the map ---------- */
+.km-podium{position:relative;flex:1 1 auto;min-height:0;min-width:0;overflow:hidden;background:var(--ondergrond);touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.km-svg{position:absolute;left:0;top:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none;max-width:none}
+.km-svg:focus{outline:none}
+.km-svg:focus-visible{outline:2px solid var(--focus);outline-offset:-3px}
+.km-svg.km-sleep{cursor:grabbing}
+.km-svg.km-hand{cursor:pointer}
+.km-nb{fill:var(--bewijsvlak);stroke:var(--bewijsvlak);stroke-width:5px;stroke-linejoin:round}
+.km-nbl{fill:none;stroke:var(--lijn);stroke-width:.8px}
+.km-land{fill:var(--papier);stroke:none}
+.km-kust{fill:none;stroke:var(--lijn-sterk);stroke-width:.9px}
+.km-enc{fill:var(--ondergrond);stroke:var(--lijn);stroke-width:.8px}
+.km-bin{fill:none;stroke:var(--lijn);stroke-width:.7px}
+.km-geo path,.km-geo use{vector-effect:non-scaling-stroke}
+.km-geo path.km-lg{vector-effect:none;fill:none;stroke:var(--ondergrond);stroke-width:14px;stroke-linejoin:bevel;stroke-linecap:butt}
+.km-wl text{font:italic 400 12px var(--letter-naam);fill:var(--inkt-2);text-anchor:middle;pointer-events:none}
+.km-wl text.km-ll{font:400 10px var(--letter-tekst);letter-spacing:.16em;fill:var(--inkt-2)}
+.km-fade{transition:opacity .15s linear}
+.km-uit{opacity:0;pointer-events:none}
+.km-dim{opacity:.15}
+.km-mi{transition:transform .2s ease;transform-box:fill-box;transform-origin:center}
+g.km-m{cursor:pointer}
+g.km-m:focus{outline:none}
+g.km-m:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.km-punt{fill:var(--inkt-2);fill-opacity:.55}
+.km-lbl{transition:opacity .12s linear}
+.km-lbl.km-zoomt{opacity:0}
+.km-lbl text{pointer-events:none}
+.km-t{font:600 13px var(--letter-tekst);fill:var(--inkt);paint-order:stroke;stroke:var(--ondergrond);stroke-width:3px;stroke-linejoin:round}
+.km-t tspan.km-tn{font-size:12px;font-weight:400;fill:var(--inkt-2);font-variant-numeric:tabular-nums}
+.km-tr{font:600 14px var(--letter-naam);fill:var(--inkt);paint-order:stroke;stroke:var(--ondergrond);stroke-width:3px;stroke-linejoin:round}
+.km-tr tspan.km-trs{font:400 12px var(--letter-tekst);fill:var(--inkt-2)}
+.km-num{font:600 11px var(--letter-tekst);fill:var(--papier);text-anchor:middle;dominant-baseline:central;font-variant-numeric:tabular-nums;pointer-events:none}
+.km-rnum{font-family:var(--letter-naam);font-weight:600;fill:var(--inkt);text-anchor:middle;dominant-baseline:central;font-variant-numeric:tabular-nums;pointer-events:none}
+.km-lead line{stroke:var(--inkt-2);stroke-opacity:.6;stroke-width:.8px}
+.km-lead circle{fill:var(--inkt-2);fill-opacity:.6}
+.km-hl circle{fill:none;stroke:var(--inkt);pointer-events:none}
+/* The dots: colour = map variant of the grandparent line, shape = kind of mention. */
+.km-vul{stroke:var(--inkt);stroke-width:.8px}
+.km-wig{stroke:var(--papier);stroke-width:.9px;stroke-linejoin:round}
+.km-inktrand{fill:none;stroke:var(--inkt);stroke-width:.8px}
+.km-rand{fill:none;stroke-width:2px}
+.km-boog{fill:none}
+.km-schijf{fill:var(--papier);stroke:var(--inkt);stroke-width:.8px}
+.km-kern{fill:var(--papier)}
+.km-pm-vol{stroke:var(--papier);stroke-width:1.5px}
+.km-pm-open{fill:var(--papier);stroke-width:2px}
+.km-pm-vol.km-l5+.km-num{fill:var(--op-kaart-5)}
+.km-vul.km-l0,.km-wig.km-l0,.km-pm-vol.km-l0{fill:var(--inkt-2)} /* the owner and parents (No. 1–3): neutral, they belong to several grandparents */
+.km-vul.km-l4,.km-wig.km-l4,.km-pm-vol.km-l4{fill:var(--kaart-4)}
+.km-vul.km-l5,.km-wig.km-l5,.km-pm-vol.km-l5{fill:var(--kaart-5)}
+.km-vul.km-l6,.km-wig.km-l6,.km-pm-vol.km-l6{fill:var(--kaart-6)}
+.km-vul.km-l7,.km-wig.km-l7,.km-pm-vol.km-l7{fill:var(--kaart-7)}
+.km-rand.km-l0,.km-boog.km-l0,.km-pm-open.km-l0{stroke:var(--inkt-2)}
+.km-rand.km-l4,.km-boog.km-l4,.km-pm-open.km-l4{stroke:var(--kaart-4)}
+.km-rand.km-l5,.km-boog.km-l5,.km-pm-open.km-l5{stroke:var(--kaart-5)}
+.km-rand.km-l6,.km-boog.km-l6,.km-pm-open.km-l6{stroke:var(--kaart-6)}
+.km-rand.km-l7,.km-boog.km-l7,.km-pm-open.km-l7{stroke:var(--kaart-7)}
+/* Small areas in HTML (bars, swatches) in the same map variants. */
+.km-sw{display:inline-block;width:12px;height:12px;border-radius:50%;flex:0 0 auto;vertical-align:-1px}
+.km-staaf{display:flex;border-radius:3px;overflow:hidden;gap:1px;background:var(--bewijsvlak)}
+.km-staaf i{display:block;min-width:2px}
+.km-sw.km-l0,.km-staaf i.km-l0,.km-pn.km-l0{background:var(--inkt-2)}
+.km-sw.km-l4,.km-staaf i.km-l4,.km-pn.km-l4{background:var(--kaart-4)}
+.km-sw.km-l5,.km-staaf i.km-l5,.km-pn.km-l5{background:var(--kaart-5)}
+.km-sw.km-l6,.km-staaf i.km-l6,.km-pn.km-l6{background:var(--kaart-6)}
+.km-sw.km-l7,.km-staaf i.km-l7,.km-pn.km-l7{background:var(--kaart-7)}
+.km-lg-vol{fill:var(--inkt-2);stroke:var(--inkt);stroke-width:.8px}
+.km-lg-open{fill:var(--papier);stroke:var(--inkt-2);stroke-width:1.8px}
+
+/* ---------- overlays on the stage ---------- */
+.km-boven{position:absolute;left:12px;top:12px;right:0;z-index:2;overflow:hidden}
+.km-gebieden{display:flex;gap:6px;overflow-x:auto;padding-right:12px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent)}
+.km-gebieden::-webkit-scrollbar{display:none}
+.km-chip{display:inline-flex;align-items:center;gap:8px;min-height:var(--doel);padding:0 14px;border:1px solid var(--lijn-sterk);border-radius:22px;background:var(--papier);color:var(--inkt);font-size:14px;white-space:nowrap;text-decoration:none;flex:0 0 auto}
+.km-chip[hidden]{display:none}
+@media (hover:hover) and (pointer:fine){.km-chip:hover{background:var(--actief)}}
+.km-gebieden .km-chip[aria-pressed="true"],.km-chip.km-zonenaam{background:var(--inkt);border-color:var(--inkt);color:var(--papier);font-weight:600}
+.km-lijnchip.aan{background:var(--actief);border-color:var(--inkt);font-weight:600}
+.km-lijnchip.uit{color:var(--inkt-2)}
+.km-lijnchip.uit .km-sw{background:transparent;box-shadow:inset 0 0 0 2px currentColor}
+.km-zoom{position:absolute;right:12px;top:68px;display:flex;flex-direction:column;gap:6px;z-index:2}
+.km-kaartknop{width:var(--doel);height:var(--doel);display:grid;place-items:center;border:1px solid var(--lijn-sterk);border-radius:var(--straal);background:var(--papier);color:var(--inkt);font-size:20px;line-height:1;padding:0}
+@media (hover:hover) and (pointer:fine){.km-kaartknop:hover{background:var(--actief)}}
+.km-banier{position:absolute;left:12px;right:68px;top:68px;z-index:2;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 12px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.km-banier[hidden]{display:none}
+.km-banier>div{flex:1 1 auto;min-width:0}
+.km-banier b{display:block;font-weight:600;font-size:14px;line-height:1.3}
+.km-banier small{display:block;font-size:12px}
+.km-legenda{display:none;position:absolute;left:16px;bottom:16px;z-index:2;padding:12px 14px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);max-width:280px;font-size:13px;line-height:1.35;color:var(--inkt)}
+.km-legenda p,.km-lees p{margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.km-legenda svg,.km-lees svg{flex:0 0 auto}
+.km-lg-sub{color:var(--inkt-2)}
+.km-schaal{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--inkt-2);margin-top:4px}
+.km-schaal svg{overflow:visible;max-width:none}
+.km-schaal path{stroke:var(--inkt-2);stroke-width:1px}
+/* Phone: the buttons 22 px above the edge, so the source line (11 px, 2 px above the edge) fits clear below them. */
+.km-knoppen{position:absolute;left:12px;bottom:22px;z-index:2;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 24px)}
+.km-knoppen .knop{padding:0 12px;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.km-knoppen .knop[aria-expanded="true"]{background:var(--actief);border-color:var(--inkt)}
+.km-badge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--inkt);color:var(--papier);font-size:12px;font-weight:600;margin-left:2px}
+.km-badge[hidden]{display:none}
+.km-bron{position:absolute;right:12px;bottom:2px;margin:0;font-size:11px;color:var(--inkt-2);z-index:1;pointer-events:none;white-space:nowrap}
+.km-bron .km-bron-lang{display:none}
+.km-hint{position:absolute;left:50%;bottom:80px;transform:translateX(-50%);margin:0;padding:7px 14px;border-radius:999px;background:var(--inkt);color:var(--papier);font-size:13px;white-space:nowrap;pointer-events:none;z-index:3;opacity:0;transition:opacity .3s}
+.km-hint.aan{opacity:1}
+.km-tip{position:absolute;z-index:4;pointer-events:none;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal);box-shadow:0 4px 14px rgba(0,0,0,.12);padding:8px 10px;max-width:240px;font-size:12px;color:var(--inkt);line-height:1.45}
+.km-tip[hidden]{display:none}
+.km-tip b{display:block;font-size:15px;margin-bottom:1px}
+.km-tip .km-tl2{display:flex;align-items:center;gap:6px}
+.km-tip .km-tl2 span{margin-left:auto;padding-left:10px;color:var(--inkt-2)}
+.km-tip .km-sw{width:9px;height:9px}
+.km-tip em{display:block;font-style:normal;color:var(--inkt-2);margin-top:4px}
+.km-leeg{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);z-index:2;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);padding:14px 16px;text-align:center;font-size:15px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.km-leeg[hidden]{display:none}
+.km-leeg p{margin:0 0 10px}
+.km-kaartje{position:absolute;left:0;right:0;bottom:0;z-index:5;background:var(--papier);border-radius:22px 22px 0 0;box-shadow:0 -8px 28px rgba(0,0,0,.14);padding:12px 16px 14px}
+.km-kaartje[hidden]{display:none}
+.km-ch{display:flex;align-items:center;gap:8px}
+.km-cn{font-size:19px;line-height:1.2;flex:1 1 auto;min-width:0}
+.km-cs{font-size:13px;margin:2px 0 8px}
+.km-ch .knop-icoon{flex:0 0 auto}
+.km-knopstrook{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+.km-knopstrook .knop{flex:1 1 auto}
+
+/* ---------- grandparent chips (phone and tablet) ---------- */
+.km-chips{display:flex;flex:0 0 auto;gap:6px;padding:7px 12px;overflow-x:auto;background:var(--papier);border-top:1px solid var(--lijn);scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent);margin-bottom:calc(82px + env(safe-area-inset-bottom))}
+.km-chips::-webkit-scrollbar{display:none}
+
+/* ---------- the right panel (laptop) and the overview inside it ---------- */
+.km-paneel{display:none}
+.km-ovz{font-size:15px;line-height:1.45;color:var(--inkt)}
+.km-titel{font-size:24px;line-height:1.15;text-wrap:pretty}
+.km-intro{margin:8px 0 0;font-size:15px;line-height:1.5}
+.km-kopje{margin:18px 0 8px;font-size:13px;font-weight:600;color:var(--inkt-2)}
+.km-zoek{position:relative;margin-top:16px}
+.km-zoek-icoon{position:absolute;left:12px;top:11px;color:var(--inkt-2);pointer-events:none}
+.km-zoek input{width:100%;height:var(--doel);padding:0 12px 0 40px;border:1px solid var(--lijn-sterk);border-radius:var(--straal);font:inherit;font-size:15px;background:var(--papier);color:var(--inkt)}
+.km-zoek input::placeholder{color:var(--inkt-3)}
+.km-qr{position:absolute;left:0;right:0;top:48px;z-index:6;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal);box-shadow:0 8px 24px rgba(0,0,0,.14);padding:4px 0 6px;max-height:340px;overflow:auto}
+.km-qr[hidden]{display:none}
+.km-qr .km-kopje{margin:8px 12px 2px}
+.km-qr [role="option"]{display:flex;justify-content:space-between;gap:10px;min-height:40px;align-items:center;padding:4px 12px;font-size:15px;cursor:pointer}
+.km-qr [role="option"] span{font-size:13px;white-space:nowrap}
+.km-qr [role="option"][aria-selected="true"]{background:var(--actief)}
+@media (hover:hover) and (pointer:fine){.km-qr [role="option"]:hover{background:var(--actief)}}
+.km-qn{padding:8px 12px;font-size:14px}
+.km-cg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.km-cg .km-chip{justify-content:flex-start;padding:0 12px;min-width:0}
+.km-cg .km-chip .getal{margin-left:auto;font-size:15px}
+.km-alle4{margin:8px 0 0}
+.km-alle4 .knop-stil{min-height:var(--doel);padding:0}
+.km-sel2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.km-sel2 label{display:block;font-size:13px;color:var(--inkt-2);min-width:0}
+.km-sel2 label span{display:block;margin-bottom:4px}
+.km-sel2 select{width:100%;height:var(--doel);min-width:0;border:1px solid var(--lijn-sterk);border-radius:var(--straal);background:var(--papier);color:var(--inkt);font:inherit;font-size:14px;padding:0 8px}
+.km-wis{margin:12px 0 0}
+.km-telling{margin:16px 0 0;padding:10px 12px;border-radius:var(--straal-groot);background:var(--bewijsvlak);font-size:14px}
+.km-telling .getal{font-size:16px}
+.km-gebied{display:block;width:100%;text-align:left;margin-top:8px;padding:12px 14px;background:var(--papier);border:1px solid var(--lijn);border-radius:var(--straal-groot);color:var(--inkt);cursor:pointer}
+@media (hover:hover) and (pointer:fine){.km-gebied:hover{border-color:var(--inkt)}}
+.km-gebied-naam{display:block;font-size:16px}
+.km-gebied-sub{display:block;font-size:13.5px;margin-top:2px}
+.km-gebied .km-staaf{margin-top:8px}
+.km-lijst{list-style:none;margin:0;padding:0}
+.km-rijknop{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:3px 2px;border:0;border-top:1px solid var(--lijn);background:none;text-align:left;font-size:14px;cursor:pointer;color:var(--inkt)}
+@media (hover:hover) and (pointer:fine){.km-rijknop:hover{background:var(--actief)}}
+.km-rijnaam{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.km-rijknop .km-staaf{width:90px;justify-self:end}
+.km-rijaantal{min-width:26px;text-align:right}
+.km-alle-kop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px}
+.km-alle-kop .km-kopje{margin:0}
+.km-alle-kop .schakel button{min-height:34px;font-size:13px}
+.km-meer{margin:10px 0 0}
+.km-over{margin-top:14px;border-top:1px solid var(--lijn)}
+.km-over summary{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 4px;font-size:16px;font-weight:600;cursor:pointer;list-style:none}
+.km-over summary::-webkit-details-marker{display:none}
+.km-over[open] summary .km-pijl{transform:rotate(90deg)}
+.km-over ul{margin:0 0 12px;padding-left:20px;font-size:14px;line-height:1.55;color:var(--inkt-2)}
+.km-over li{margin:0 0 6px}
+.km-pijl{flex:0 0 auto;transition:transform .15s}
+
+/* ---------- place sheet and person sheet ---------- */
+.km-terug{margin:0 0 6px}
+.km-terug .knop-stil{display:inline-flex;align-items:center;gap:4px;min-height:var(--doel);padding:0;font-size:14px;color:var(--inkt-2);text-decoration:none}
+@media (hover:hover) and (pointer:fine){.km-terug .knop-stil:hover{color:var(--inkt)}}
+.km-sub{font-size:14px;margin:0;display:flex;align-items:center;gap:6px}
+.km-h{font-size:28px;line-height:1.15;margin:6px 0 0;text-wrap:pretty}
+.km-h-klein{font-size:21px;margin:0 0 10px}
+.km-aantal{margin:4px 0 0;font-size:15px}
+.km-aantal .getal{font-size:17px;color:var(--inkt)}
+.km-blad .km-staaf,.km-inh .km-staaf{margin-top:10px}
+.km-leg{margin:6px 0 0;font-size:13px;display:flex;flex-wrap:wrap;gap:4px 10px}
+.km-leg span{display:inline-flex;align-items:center;gap:5px}
+.km-leg .km-sw{width:10px;height:10px}
+.km-zin{margin:10px 0 0;font-size:14px;line-height:1.45}
+.km-groepkop{display:flex;align-items:center;gap:10px;margin-top:8px;padding:4px 0 0;border-top:1px solid var(--lijn)}
+.km-groepkop h2{flex:1 1 auto;margin:0;font-size:14px;font-weight:600;color:var(--inkt-2)}
+.km-groepkop a{display:inline-flex;align-items:center;min-height:var(--doel);font-size:14px;white-space:nowrap}
+.km-grp{margin-top:4px}
+.km-gh{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:8px;width:100%;min-height:var(--doel);border:0;border-bottom:1px solid var(--lijn);background:var(--papier);padding:0 2px;font-size:14px;font-weight:600;cursor:pointer;text-align:left;color:var(--inkt)}
+.km-gh .km-sw{width:10px;height:10px}
+.km-gh b{font-weight:400;color:var(--inkt-2);margin-left:auto;font-size:14px}
+.km-gh[aria-expanded="true"] .km-pijl{transform:rotate(90deg)}
+.km-rijen{padding:0;margin:4px 0 0}
+/* The same fixed number column as the register (register.css, .reg-gen .rij): 72 px, numbers on the right in 20 px, 16 px of space. */
+.km .rij{grid-template-columns:72px minmax(0,1fr) auto;column-gap:16px}
+.km .rij-nr{font-size:20px;text-align:right;white-space:nowrap}
+@media (hover:hover) and (pointer:fine){.km .rij:hover{background:var(--actief)}}
+.km .rij .status{display:inline-flex;gap:2px}
+.km-pl .km-pr{display:flex;align-items:center;gap:9px;width:100%;min-height:var(--doel);border:0;border-top:1px solid var(--lijn);background:none;text-align:left;cursor:pointer;font-size:14px;padding:4px 2px;color:var(--inkt)}
+.km-pl .km-pr.km-act{background:var(--actief)}
+@media (hover:hover) and (pointer:fine){.km-pl .km-pr:hover{background:var(--actief)}}
+.km-pn{width:22px;height:22px;border-radius:50%;color:var(--papier);font-size:11px;font-weight:600;display:grid;place-items:center;flex:0 0 auto;font-variant-numeric:tabular-nums;font-family:var(--letter-tekst)}
+/* On the gold of the paternal grandmother's line: dark digits (4.9:1), not white (3.3:1). */
+.km-pn.km-l5{color:var(--op-kaart-5)}
+.km-pn.km-hol{background:var(--papier)!important;border:2px solid var(--lijn-sterk)}
+.km-keten .km-lr{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;width:100%;min-height:var(--doel);border:0;border-top:1px solid var(--lijn);background:none;padding:4px 2px;font-size:14px;text-align:left;color:var(--inkt)}
+.km-keten button.km-lr{cursor:pointer}
+@media (hover:hover) and (pointer:fine){.km-keten button.km-lr:hover{background:var(--actief)}}
+.km-keten .km-lr .getal{font-size:17px;color:var(--inkt-2)}
+.km-keten .km-tx{color:var(--inkt-2)}
+.km-kleuren li{display:flex;align-items:center;gap:8px;min-height:32px;font-size:14px}
+.km-blad{display:none}
+
+/* ---------- in the person card ---------- */
+.km-op-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.km-op-chip{display:inline-flex;align-items:center;min-height:36px;padding:0 10px;border:1px solid var(--lijn-sterk);border-radius:999px;font-size:14px;text-decoration:none;color:var(--inkt);font-variant-numeric:tabular-nums}
+@media (hover:hover) and (pointer:fine){.km-op-chip:hover{background:var(--actief)}}
+.km-op-tekst{font-size:14px;color:var(--inkt-2);margin:0 0 8px;line-height:1.5}
+.km-op .knop{margin-top:4px}
+
+/* ---------- phone and tablet: sheets ---------- */
+@media (max-width:1179px){
+  .km-blad{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;z-index:25;max-height:calc(100% - 60px);background:var(--papier);border-radius:22px 22px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.14);padding:0 20px 0;overflow:hidden}
+  .km-blad[hidden]{display:none}
+  .km-blad-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 4px;flex:0 0 auto}
+  .km-blad-sub{font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .km-blad-inhoud{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 0 calc(24px + env(safe-area-inset-bottom))}
+  .km-blad .km-ovz{padding-top:4px}
+  .km-blad .km-titel,.km-blad .km-intro{display:none}
+  .km-blad .km-zoek{margin-top:4px}
+  .km-blad .km-h{font-size:28px}
+  .km-blad .km-gh{top:0}
+  .km-rijknop{min-height:var(--doel)}
+}
+@media (max-width:759px){
+  .km-blad.km-blad-plaats{height:55%}
+}
+/* Tablet: 64 px sidebar on the left; the view fills the main column; the sheet sits on the right as a side panel. */
+@media (min-width:760px){
+  /* The main column has no fixed height (the page scrolls); the map therefore takes the screen height itself, like the sidebar in basis.css. */
+  .weergave-kaart{position:relative;top:auto;left:auto;right:auto;bottom:auto;margin:-20px -24px -40px;height:100vh;height:100dvh;z-index:auto}
+  .km{flex-direction:column}
+  .km-chips{margin-bottom:0;padding:8px 16px}
+  .km-boven{left:16px;top:16px}
+  .km-zoom{right:16px;top:72px}
+  .km-knoppen{left:16px;bottom:16px}
+  .km-bron{right:16px;bottom:4px}
+  .km-bron .km-bron-lang{display:inline}
+  .km-blad{position:absolute;left:auto;top:0;right:0;bottom:0;width:min(430px,100%);max-height:none;border-radius:0;border-left:1px solid var(--lijn);box-shadow:-8px 0 30px rgba(0,0,0,.12);padding:0 24px;z-index:6}
+  .km-blad .persoon-greep{display:none}
+  .km-blad-kop{padding-top:18px}
+  .km-kaartje{left:auto;right:16px;bottom:16px;width:min(400px,calc(100% - 32px));border-radius:var(--straal-groot);box-shadow:0 8px 28px rgba(0,0,0,.14)}
+}
+/* Laptop: stage on the left, the 400 px panel on the right; chips, zoom and legend as cards on the stage. */
+@media (min-width:1180px){
+  .weergave-kaart{margin:-24px -28px -40px;height:100vh;height:100dvh}
+  .km{flex-direction:row}
+  .km-podium{flex:999 1 500px}
+  .km-chips{display:none}
+  .km-zoom{top:16px}
+  .km-legenda{display:block}
+  .km-knoppen{display:none}
+  .km-hint{bottom:auto;top:72px}
+  .km-kaartje{display:none}
+  .km-paneel{display:block;flex:0 0 400px;box-sizing:border-box;min-height:0;overflow:auto;overscroll-behavior:contain;padding:22px 24px 40px;background:var(--papier);border-left:1px solid var(--lijn)}
+  .km-blad{display:none!important}
+}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .km-blad{transition:transform .22s ease-out}
+  .km-blad.schuift{transform:translateY(100%)}
+  .km-chip,.km-kaartknop,.km-gebied,.km-rijknop{transition:background-color .12s}
+}
+@media (prefers-reduced-motion:reduce){
+  .km-fade,.km-mi,.km-lbl,.km-blad,.km-hint,.km-pijl{transition:none!important}
+}
+@media print{.weergave-kaart{position:static;height:auto}.km-blad,.km-tip,.km-hint{display:none!important}}
+
+
+/* ---------- Touch and long text (added after review with mobile-native and break-ui) ---------- */
+/* No double-tap zoom and no grey tap flash; the own :active state gives the feedback. */
+a,button,summary,label,select,input,[role="button"],[role="option"]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+/* Input fields at 16 px so iOS does not zoom on focus. Placed at the bottom so it overrides the earlier sizes. */
+@media (pointer:coarse){
+  input,select,textarea,.zoek input,.reg-zoek input,.km-zoek input,.km-sel2 select{font-size:16px}
+}
+/* Long words break instead of running out of the box. */
+.rij-naam,.fam-naam,.persoon-titel h1,.reg-leeg h2,.reg-leeg p,.reg-status,.kr-nu,.v-naam,.tk-naam{overflow-wrap:anywhere}
