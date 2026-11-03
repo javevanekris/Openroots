@@ -35,6 +35,7 @@ need extra care, even for people who died long ago, because they affect living d
 
 - **A private file.** Send `dist/index.html` to family. It works offline. Anyone with the file has all the data in it.
 - **A private link.** Host it where only invited people can read it.
+- **A Claude artifact.** Claude Code can publish the built file as a page on claude.ai. It is private until you share the link. After that, everyone with the link can read all the data in it. See the README.
 - **A public site.** Only with data you would be comfortable seeing in a search engine.
 
 ## Photos and documents

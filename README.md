@@ -46,6 +46,25 @@ shows its Guide with the steps to add your own.
 Keep your own data **out of any public repository**. `my-data/` and `dist/` are listed in
 `.gitignore` for that reason. Read [docs/privacy.md](docs/privacy.md) before you publish anything.
 
+## Make it a Claude artifact
+
+The built chart is one HTML file that needs nothing else, so it also works as a
+[Claude](https://claude.ai) artifact: a page that Claude hosts for you and that stays private until
+you share it.
+
+1. Build your chart with your own data, as above. That gives you `dist/index.html`.
+2. Open Claude Code, or the Code tab of the Claude desktop app, in this folder.
+3. Ask: "Publish dist/index.html as an artifact." Claude uploads the file as it is and gives you
+   a link to the page.
+4. To update the chart later, change your data, build again and ask Claude to update the artifact.
+   Give it the link, so the address stays the same.
+
+Use Claude Code for this step. In a regular chat on claude.ai, Claude would have to write the whole
+page out itself, and the app is usually too large for that.
+
+Before you share the link, read [docs/privacy.md](docs/privacy.md). Anyone you share it with can
+read every name, date and note in the chart.
+
 ## Documentation
 
 | | |

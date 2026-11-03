@@ -41,3 +41,15 @@ subscription and no paywall. Keep that goal in mind in everything you build or r
 - Run the checks before you finish: `node tools/smoke.mjs dist/demo.html` after building the demo.
 - Interface text is English and follows `docs/glossary.md`. Identifiers are still Dutch for now.
   Do not rename them in a feature change. If you rename them, do it in a pull request of its own.
+
+## Publishing a chart as a Claude artifact
+
+Users can also keep their chart as a Claude artifact. If a user asks for that:
+
+- Build `dist/index.html` from their data folder with `node build.mjs --data <folder>` and publish
+  that file as it is. Do not retype or paste the page; it is too large and would change.
+- Publish only when the user asks. An artifact starts private. Never share it or make it public
+  on your own.
+- Go through `docs/privacy.md` with the user first. Leave out living people unless they decide
+  otherwise.
+- To update the chart, rebuild and publish to the same artifact link, so the address stays the same.
