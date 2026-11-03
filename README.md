@@ -10,7 +10,8 @@ OpenRoots is two things:
    in shapes and words rather than colour alone. It works on phones, tablets and laptops,
    in light and dark mode, and offline once opened.
 2. **An agent skill, `ancestor-research`.** Instructions and tools that let an AI agent search
-   free archives, cite what it finds, grade the evidence, and hand back results you can check.
+   free archives, cite what it finds, grade the evidence, and hand back results you can check. See
+   [Fill your chart with AI agents](#fill-your-chart-with-ai-agents).
 
 This repository is a **template**. It contains no family data. You bring your own.
 
@@ -46,6 +47,43 @@ shows its Guide with the steps to add your own.
 Keep your own data **out of any public repository**. `my-data/` and `dist/` are listed in
 `.gitignore` for that reason. Read [docs/privacy.md](docs/privacy.md) before you publish anything.
 
+## Fill your chart with AI agents
+
+You do not have to write a single data file yourself. Tell an AI agent what you know in plain
+words, and let it do the searching and the typing. One user found about 1,000 ancestors in one
+week this way.
+
+With Claude Code it goes like this:
+
+1. Copy `skills/ancestor-research/` into `.claude/skills/` in your project, or into
+   `~/.claude/skills/` to use it everywhere.
+2. Tell the agent what you already know. For example: "I am Alex Example, born in 1985 in
+   Millbrook. My father is Thomas Example, my mother is Eleanor Alder. Start my chart in
+   my-data." The agent writes the data files for you.
+3. Ask for research: "Use the ancestor-research skill to find the parents of No. 4." Or think
+   bigger: "Work through generation 5 and find what the free archives hold for each person."
+   The agent can split the work over sub-agents, one family line each.
+4. Read the one-page report. Every finding has a source link and a grade: confirmed, probable,
+   possible or unverified.
+5. Say what to keep: "Add the confirmed and probable findings to my chart and rebuild it."
+6. Open `dist/index.html`, or have Claude publish it as an artifact (see below).
+
+Repeat steps 3 to 5 for each generation. Every round the chart grows, and its open ends show
+where to search next.
+
+It goes fast because the agent searches archive indexes in seconds, follows each new name on to
+the next generation, and logs every search, so nothing is done twice. It stays reliable because
+every fact needs a source the agent actually opened, and the chart shows how sure each one is.
+You stay in charge of what goes in.
+
+How fast it goes for you depends on your region. Dutch records are very well indexed for free:
+the skill's helper script reads the free Open Archives API, which holds mostly Dutch records.
+For other countries the skill points to the best free sources per country, listed in
+[references/regions.md](skills/ancestor-research/references/regions.md).
+
+Behind the scenes the agent writes a research log, a cited `findings.json` and a one-page report
+for each question, and checks them with the bundled validator.
+
 ## Make it a Claude artifact
 
 The built chart is one HTML file that needs nothing else, so it also works as a
@@ -76,16 +114,6 @@ read every name, date and note in the chart.
 | [docs/privacy.md](docs/privacy.md) | Living people, sensitive facts, and publishing safely |
 | [skills/ancestor-research](skills/ancestor-research/README.md) | The agent skill |
 | [AGENTS.md](AGENTS.md) | Start here if you are an AI agent |
-
-## Using the agent skill
-
-Copy `skills/ancestor-research/` into the skills folder of your agent. For Claude Code that is
-`.claude/skills/` in your project. Then ask, for example: "Use the ancestor-research skill to find
-the parents of person No. 5 in my chart." The agent writes a research log, a cited
-`findings.json` and a one-page report, and checks them with the bundled validator.
-
-The skill's helper script reads the free Open Archives API. That API holds mostly Dutch records, so
-for other countries the skill points to the best free sources per country.
 
 ## Status and known limits
 

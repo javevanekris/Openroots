@@ -118,6 +118,21 @@ Create `research/YYYY-MM-DD-short-slug/` with:
 Run `node scripts/validate-findings.mjs research/<folder>/findings.json`. Fix every error.
 Warnings need a one-line reason in the report or a fix.
 
+### 12. Add to the chart (only when the user asks)
+After the user has read the report and said which findings to add, write them into the chart's
+data folder (in a copy of this template that is usually `my-data/`). Follow `docs/data-format.md`
+in the repository root.
+- A new ancestor goes into `P` at its Ahnentafel number: the father of No. n is 2n, the mother
+  2n+1. A marriage goes into `M` under the father's number. Add the source codes to `SRC`.
+- Map the confidence to the chart status. `confirmed`: add the record links to `AKTE` and remove
+  the number from `OB`, `VB` and `NB`. `probable`: add the number to `OB`. `possible`: add it to
+  `VB` and give the reason in `NOTE`. `unverified`: add it to `NB`.
+- Never overwrite a confirmed fact. A conflict goes into `NOTE`, with both sources.
+- Researched details about living people stay out, as in step 9. What the user tells you about
+  themselves and living relatives may go into their own private data folder.
+- Build and check: `node build.mjs --data <folder>`, then `node tools/smoke.mjs dist/index.html`.
+  Tell the user how many people were added, per status.
+
 ## Using sub-agents
 
 Use sub-agents when the work splits cleanly, for example one surname or one archive each.
