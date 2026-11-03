@@ -64,8 +64,8 @@ Needed only for the extra sections on cards of No. 8 and up. Provide all ten par
 ### UPD, GEN, CFG
 See the table. Without a `d`, put the period before a colon in `t`: `"Between 1 and 4 October: ..."`.
 
-## Netherlands-specific
-The tokens above are Dutch. `C` tags use `NL`. The map projection is fixed (see `map-data.md`). Opening records on `openarchieven.nl` are counted separately in the evidence line.
+## Parts that were made for Dutch records
+The tokens above are Dutch. `C` tags use `NL`. The map projection is set by `B.proj` (see `map-data.md`). Opening records on `openarchieven.nl` are counted separately in the evidence line.
 
 ## Filling in your chart in 10 steps
 1. Copy `examples/demo/` to a new folder.

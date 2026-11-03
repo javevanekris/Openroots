@@ -15,6 +15,37 @@ OpenRoots is two things:
 
 This repository is a **template**. It contains no family data. You bring your own.
 
+## What it looks like
+
+These screenshots come from the fictional demo chart in `examples/demo/`. Nobody in it is real, and the
+map shows England with invented villages. Your own chart looks the same, with your own people.
+
+**The tree.** A pedigree diagram. Click a name for the person card, and use the arrows to climb further up.
+
+![The tree view of the demo chart](docs/screenshots/tree.png)
+
+**The person card.** Life events, sources, a story, family and children. It shows how sure each fact is.
+
+![A person card next to the tree](docs/screenshots/person.png)
+
+**The origins map.** Where the ancestors came from, by region and by grandparent line.
+
+![The origins map of the demo chart, drawn on England](docs/screenshots/map.png)
+
+**The overview.** Every generation as a bar: colour shows the grandparent line, fill shows how certain.
+
+![The overview of the demo chart](docs/screenshots/overview.png)
+
+**The register.** Everyone in Ahnentafel order, with search and filters.
+
+![The register of the demo chart](docs/screenshots/register.png)
+
+**Progress.** The figures, the open ends and what is attached.
+
+![The progress view of the demo chart](docs/screenshots/progress.png)
+
+Build the demo yourself with `node build.mjs --data examples/demo --out dist/demo.html`.
+
 ## What it replaces, and what it does not
 
 OpenRoots is meant as a free alternative to the part of MyHeritage and Ancestry that people use
@@ -113,6 +144,7 @@ read every name, date and note in the chart.
 |---|---|
 | [docs/data-format.md](docs/data-format.md) | Every data file, field and token |
 | [docs/config.md](docs/config.md) | Title, owner, contact and other settings |
+| [docs/architecture.md](docs/architecture.md) | How the app is built: build, modules, views, statuses |
 | [docs/map-data.md](docs/map-data.md) | How the map works and what it needs |
 | [docs/glossary.md](docs/glossary.md) | The words used in the interface |
 | [docs/privacy.md](docs/privacy.md) | Living people, sensitive facts, and publishing safely |
@@ -126,8 +158,9 @@ This is an early version. Parts of the code were first written in Dutch.
 - The interface is English. Some internal names in the code, such as class names, routes and data
   tokens, are still Dutch. They work, and [docs/data-format.md](docs/data-format.md) lists them.
   Renaming them is a planned cleanup.
-- The map and the historical context are built around the Netherlands. For other regions you supply
-  your own map outline. See [docs/map-data.md](docs/map-data.md).
+- The map works for any country. A script builds the outline from public-domain data, and the demo
+  shows England. The historical context events in `C` are yours to write. See
+  [docs/map-data.md](docs/map-data.md).
 - The sample data is entirely fictional.
 
 ## Contributing

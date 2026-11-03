@@ -32,7 +32,7 @@ subscription and no paywall. Keep that goal in mind in everything you build or r
 ## What to read
 
 - Researching ancestors: `skills/ancestor-research/SKILL.md`, then its `references/`.
-- Changing the app: `README.md`, `docs/data-format.md`, `docs/glossary.md`, `CONTRIBUTING.md`.
+- Changing the app: `README.md`, `docs/architecture.md`, `docs/data-format.md`, `docs/glossary.md`, `CONTRIBUTING.md`.
 - Filling a chart: `docs/data-format.md` and `docs/config.md`.
 
 ## Working on the app

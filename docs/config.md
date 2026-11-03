@@ -24,7 +24,7 @@ family-specific text. Every key is optional. Empty values fall back to the defau
 | `tagline` | string | `""` | A second free line, for example where the data was checked. Hidden when empty. |
 | `contact.email` | string | `""` | Shown in the Contact view. When both `email` and `text` are empty the Contact view is hidden from the navigation. |
 | `contact.text` | string | `""` | A short text for the Contact view, for example what help you are looking for. |
-| `lineLabels` | object | `{}` | Optional labels for the four grandparent lines, keyed by `"4"`, `"5"`, `"6"`, `"7"`, for example `{"4": "Paternal grandfather's line"}`. Missing labels are built from the names in `P`. |
+| `lineLabels` | object | `{}` | Optional labels for the four grandparent lines, keyed by `"4"`, `"5"`, `"6"`, `"7"`, for example `{"4": "Grandpa Edmund Example"}`. Missing labels are built from the names in `P`. |
 
 The code reads this block as `kern.CFG`. It always exists, with defaults filled in.
 

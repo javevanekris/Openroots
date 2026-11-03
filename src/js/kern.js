@@ -1,7 +1,7 @@
 // kern.js
 // ui/kern.js: the shared core of the interface. Data as Map/Set, calculation rules on Ahnentafel numbers,
 // the life-course parser, one counting function, the router on the URL hash, registration of views and
-// person card sections, the theme and the start. Everything later builders need is in ui/API.md.
+// person card sections, the theme and the start. Everything later builders need is described in docs/architecture.md.
 'use strict';
 (function () {
   const kern = {};

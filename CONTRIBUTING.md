@@ -14,7 +14,7 @@ something is personal, it is.
 - **Regional sources.** Improve `skills/ancestor-research/references/regions.md` for your country:
   which archives are free, how civil registration works, name customs, calendar changes. Say how
   you checked each site and when.
-- **Maps.** Help to make the map generic. See `docs/map-data.md`.
+- **Maps.** A script makes the base map from Natural Earth. Help to add region boxes, labels and places for more countries. See `docs/map-data.md`.
 - **Translations.** The interface text is English. A way to add other languages is planned; open an
   issue before you start so the work fits together.
 - **Cleanups.** The code still has Dutch identifiers. A rename is welcome as its own pull request,

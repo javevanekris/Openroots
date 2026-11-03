@@ -30,8 +30,11 @@
   const vrw = n => (n === 1 ? '1 ancestor' : n + ' ancestors');
   const plw = n => (n === 1 ? '1 place' : n + ' places'); // i18n: English plural for places
   const nmP = n => { const p = K.P.get(n); return (p && p[0]) || ('No. ' + n); };
-  const C0 = Math.cos(52.2 * Math.PI / 180);
-  const pr = (lon, lat) => [(lon - 3.3) * C0 * 180, (53.6 - lat) * 180];
+  // Projection of the plane that B uses. B.proj = {lon0, lat0, lat1, s}: left edge, top edge, the parallel for the width, and units per degree.
+  // Without B.proj the plane is the one of the Netherlands that the first data used.
+  const PJ = Object.assign({ lon0: 3.3, lat0: 53.6, lat1: 52.2, s: 180 }, (B && B.proj) || {});
+  const C0 = Math.cos(PJ.lat1 * Math.PI / 180);
+  const pr = (lon, lat) => [(lon - PJ.lon0) * C0 * PJ.s, (PJ.lat0 - lat) * PJ.s];
   const NS = 'http://www.w3.org/2000/svg';
   const mqR = matchMedia('(prefers-reduced-motion: reduce)');
   const mqH = matchMedia('(hover:hover) and (pointer:fine)');
@@ -406,7 +409,7 @@ ${overHtml()}`;
     const wlUit = telefoon() && V.k < 3.5, ringen = V.k < 3.5 ? RINGS.filter(s => s.vis) : [];
     // A water label that touches a ring drops out, just like a label that crosses the edge.
     const raaktRing = w => ringen.some(s => rc([w.x - w.w / 2, w.y - w.as, w.x + w.w / 2, w.y + w.de], s.sx, s.sy, s.r + 2));
-    WLS.forEach(w => { w.x = w.l.x * V.k + V.tx; w.y = w.l.y * V.k + V.ty; w.el.setAttribute('x', w.x.toFixed(1)); w.el.setAttribute('y', w.y.toFixed(1)); w.uit = (w.l.t === 'Markermeer' && wlUit) || (w.w > 0 && (w.x - w.w / 2 < 2 || w.x + w.w / 2 > W - 2 || w.y - w.as < 2 || w.y + w.de > H - 2 || raaktRing(w))); w.el.style.display = w.uit ? 'none' : ''; });
+    WLS.forEach(w => { w.x = w.l.x * V.k + V.tx; w.y = w.l.y * V.k + V.ty; w.el.setAttribute('x', w.x.toFixed(1)); w.el.setAttribute('y', w.y.toFixed(1)); w.uit = (w.l.hid && wlUit) || (w.w > 0 && (w.x - w.w / 2 < 2 || w.x + w.w / 2 > W - 2 || w.y - w.as < 2 || w.y + w.de > H - 2 || raaktRing(w))); w.el.style.display = w.uit ? 'none' : ''; });
     leiders(); hl();
   }
   function modus() {
