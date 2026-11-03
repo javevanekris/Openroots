@@ -44,6 +44,15 @@ map shows England with invented villages. Your own chart looks the same, with yo
 
 ![The progress view of the demo chart](docs/screenshots/progress.png)
 
+**On a phone.** The tree stands upright, with the person at the bottom and the ancestors branching upwards.
+
+<p>
+<img src="docs/screenshots/phone-tree.jpg" alt="The tree on a phone" width="200">
+<img src="docs/screenshots/phone-person.jpg" alt="A person card on a phone" width="200">
+<img src="docs/screenshots/phone-map.jpg" alt="The map on a phone" width="200">
+<img src="docs/screenshots/phone-overview.jpg" alt="The overview on a phone" width="200">
+</p>
+
 Build the demo yourself with `node build.mjs --data examples/demo --out dist/demo.html`.
 
 ## What it replaces, and what it does not
