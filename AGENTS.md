@@ -4,6 +4,17 @@ This repository is a template for a family ancestor chart. It holds **no real da
 asked to work on a family chart, you will usually work on a copy that lives outside this repository
 or in a folder that git ignores.
 
+## Why this project exists
+
+OpenRoots was made as a replacement for MyHeritage: a family tree that you own and keep, with no
+subscription and no paywall. Keep that goal in mind in everything you build or research here.
+
+- Anything a person needs to build, read and share a chart must work without an account and
+  without payment.
+- Where MyHeritage would show a paid record, look for the free route to the same information. If
+  there is none, say so plainly and record the gap as a lead.
+- OpenRoots is an independent project. It is not affiliated with or endorsed by MyHeritage.
+
 ## Hard rules
 
 1. **Never commit personal data.** No names, dates, places, photos or notes about real people in
