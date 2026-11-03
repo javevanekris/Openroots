@@ -38,6 +38,6 @@ What was searched, the period and name variants, and why a hit was expected.
 
 ## Privacy gate
 
-- [ ] No presumed-living person in public output
+- [ ] Presumed-living people listed in the report, with a reminder about sharing
 - [ ] Sensitive claims worded as what the record says
 - [ ] No paid-service content or login-only data

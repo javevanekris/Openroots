@@ -80,4 +80,4 @@ The tokens above are Dutch. `C` tags use `NL`. The map projection is fixed (see 
 10. Run `node build.mjs --data <folder>` then `node tools/smoke.mjs dist/index.html`.
 
 ## Privacy
-Do not put living people in a public repository. Leave out names, dates and places of anyone who may be alive, or keep that data private.
+Your chart may include living people. Keep your data out of public repositories, and be careful who you share the built chart with. See `privacy.md`.

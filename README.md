@@ -76,6 +76,10 @@ the next generation, and logs every search, so nothing is done twice. It stays r
 every fact needs a source the agent actually opened, and the chart shows how sure each one is.
 You stay in charge of what goes in.
 
+Your chart may end up with details about living relatives, found by you or by the agent. That is
+fine in a file you keep. Be careful who you share it with, and read [docs/privacy.md](docs/privacy.md)
+first.
+
 How fast it goes for you depends on your region. Dutch records are very well indexed for free:
 the skill's helper script reads the free Open Archives API, which holds mostly Dutch records.
 For other countries the skill points to the best free sources per country, listed in

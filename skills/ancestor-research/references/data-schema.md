@@ -62,7 +62,7 @@ app and the merge tools read this shape. `scripts/validate-findings.mjs` checks 
 
 **subjects**: people the claims are about. `id` is `p:<ahnentafel number>` for people already in the
 chart, or `tmp:<n>` for candidates not yet placed. `deceased` is `true`, `false` or `"unknown"`.
-Treat `"unknown"` as living for privacy checks.
+Treat `"unknown"` as living when you list who is presumed living.
 
 **claims.field**, one of:
 `name`, `sex`, `birth.date`, `birth.place`, `baptism.date`, `baptism.place`,
@@ -76,8 +76,8 @@ Dates are ISO (`1851-03-14`, `1851-03`, `1851`) or `about 1851`, `before 1851`, 
 
 **evidence_type**: `direct`, `indirect`, `negative`.
 
-**public**: `false` keeps the claim out of anything published. Use it for presumed-living people
-and for private notes. Default is `true`.
+**public**: `false` marks a claim that should not be shared outside the user's own chart, such
+as a private note. Default is `true`.
 
 **sources.source_type**: `original`, `derivative`, `authored`.
 **sources.information_type**: `primary`, `secondary`, `undetermined`.

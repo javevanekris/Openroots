@@ -29,9 +29,10 @@ Read the three rules below before anything else. They matter more than speed.
    and a short verbatim excerpt from the page or record you fetched in this session.
    Never fill a gap from memory, from a model guess, or from "this name is common here".
    A name that looks right is not evidence. If you cannot cite it, it does not go in.
-3. **Living people stay out.** Treat anyone born less than 100 years ago, with no death
-   record, as living. Their names, dates and places never enter public output. See
-   `references/privacy.md`.
+3. **Living people may go in, sharing needs care.** The user's own chart may hold living
+   relatives, including what you find about them. Treat anyone born less than 100 years ago,
+   with no death record, as living. Mark them, list them in the report, and warn the user
+   before a chart with living people is shared or published. See `references/privacy.md`.
 
 Also: respect rate limits (Open Archives allows 4 requests per second per IP; the bundled
 script already throttles), identify yourself with a plain user agent, and report negative
@@ -102,8 +103,8 @@ Conflicting evidence is never averaged away. List it under `conflicts` and expla
 source you weigh more and why.
 
 ### 9. Privacy gate
-Run the checks in `references/privacy.md` on every claim. Anything about a possibly living
-person is moved to `private` output or dropped. Claims about crime, collaboration, medical
+Run the checks in `references/privacy.md` on every claim. Mark every presumed-living person
+and list them in the report under "Living people in this chart". Claims about crime, collaboration, medical
 conditions, adoption or paternity need a document that says so directly, and are worded as
 what the record states, not as a verdict on the person.
 
@@ -128,8 +129,8 @@ in the repository root.
   the number from `OB`, `VB` and `NB`. `probable`: add the number to `OB`. `possible`: add it to
   `VB` and give the reason in `NOTE`. `unverified`: add it to `NB`.
 - Never overwrite a confirmed fact. A conflict goes into `NOTE`, with both sources.
-- Researched details about living people stay out, as in step 9. What the user tells you about
-  themselves and living relatives may go into their own private data folder.
+- Living people may go in, including what you found about them. Name them in your summary and
+  remind the user to be careful with sharing the chart (see `docs/privacy.md`).
 - Build and check: `node build.mjs --data <folder>`, then `node tools/smoke.mjs dist/index.html`.
   Tell the user how many people were added, per status.
 

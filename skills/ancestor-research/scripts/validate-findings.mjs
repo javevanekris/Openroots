@@ -5,7 +5,7 @@
 //
 // It enforces the ground rules of the ancestor-research skill:
 //   1. no paid-service sources, 2. every claim has a cited, excerpted source,
-//   3. no presumed-living person in public claims, plus evidence and plausibility checks.
+//   3. presumed-living people flagged once each (warning), so the report can list them, plus evidence and plausibility checks.
 
 import fs from 'node:fs';
 
@@ -131,20 +131,19 @@ for (const [key, list] of byKey) {
   }
 }
 
-// ---- privacy: presumed living people must not appear in public claims
+// ---- privacy: living people may be in the user's own chart; flag each one once for sharing
 const hasDeath = new Set(claims.filter(c => c.field === 'death.date' || c.field === 'burial.date').map(c => c.subject));
 const cutoff = thisYear - 100;
+const flagged = new Set();
 for (const c of claims) {
-  if (c.public === false) continue;
+  if (c.public === false || flagged.has(c.subject)) continue;
   const s = subj.get(c.subject);
   if (!s) continue;
-  if (s.deceased === false) { err('claim ' + c.id + ': subject ' + c.subject + ' is marked as living; set public to false'); continue; }
   if (s.deceased === true || hasDeath.has(c.subject)) continue; // shown deceased
-  // Not shown deceased: only fine when the birth year is known and more than 100 years ago.
   const bornYear = yearOf((byKey.get(c.subject + '|birth.date') || [])[0]?.value);
-  if (bornYear == null || bornYear >= cutoff) {
-    err('claim ' + c.id + ': subject ' + c.subject + ' may be living (no death record, born ' + (bornYear ?? 'unknown') + '); set public to false, or set deceased to true with a source');
-  }
+  if (s.deceased !== false && bornYear != null && bornYear < cutoff) continue; // born more than 100 years ago
+  flagged.add(c.subject);
+  warn('subject ' + c.subject + (s.deceased === false ? ' is living' : ' may be living (no death record, born ' + (bornYear ?? 'unknown') + ')') + ': fine in the chart; list them in the report so the user takes care when sharing');
 }
 
 // ---- plausibility between parents and children

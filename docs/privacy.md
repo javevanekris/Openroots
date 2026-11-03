@@ -11,16 +11,23 @@ copied, cached and indexed, and cannot be taken back.
 - If you fork the repository, do not commit your data to your fork if it is public.
 - Never paste real family data into an issue, a pull request or a chat with a tool you do not control.
 
-## Who may appear
+## Living people
 
-| Person | Rule |
+Your own chart may hold everyone, living relatives included, with everything you and your agents
+found about them. That is fine in a file you keep yourself. Take care when you share it: whoever
+has the file or the link can read all of it.
+
+Before you share, check who is in it:
+
+| Person | Before sharing |
 |---|---|
-| Died more than about 20 years ago, or born more than 100 years ago | Usually fine to publish |
-| Born in the last 100 years with no death record | Treat as living. Leave out the name, dates and places, or publish the chart only to people you trust |
+| Died more than about 20 years ago, or born more than 100 years ago | Usually fine to share |
+| Born in the last 100 years with no death record | Presume living. Share only with people you trust, or share a copy without them |
 | A minor | Never publish details of a living minor |
 | Yourself and your close family | Your choice, with their consent |
 
-When you are unsure, leave it out. A chart that shows "Living" in place of a name is still a useful chart.
+To share a chart without the living people, copy your data folder, remove them from the copy and
+build that copy on its own.
 
 ## Sensitive facts
 

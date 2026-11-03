@@ -20,8 +20,9 @@ subscription and no paywall. Keep that goal in mind in everything you build or r
 1. **Never commit personal data.** No names, dates, places, photos or notes about real people in
    this repository, in issues, in pull requests, in test data or in commit messages. The demo data
    in `examples/demo/` is fictional and must stay fictional.
-2. **Never include living people** in anything that is published. Treat anyone born in the last 100
-   years without a death record as living.
+2. **Living people are allowed in a user's own chart**, including what you found about them.
+   Before the chart is shared or published, tell the user which presumed-living people are in it.
+   Treat anyone born in the last 100 years without a death record as living.
 3. **Free and open sources only.** Never log in to MyHeritage, Ancestry or any paid service, never
    use someone else's account, never scrape behind a paywall, never solve a CAPTCHA, never ignore
    robots.txt. A paywalled record is a lead, nothing more.
@@ -50,6 +51,6 @@ Users can also keep their chart as a Claude artifact. If a user asks for that:
   that file as it is. Do not retype or paste the page; it is too large and would change.
 - Publish only when the user asks. An artifact starts private. Never share it or make it public
   on your own.
-- Go through `docs/privacy.md` with the user first. Leave out living people unless they decide
-  otherwise.
+- Go through `docs/privacy.md` with the user first, and tell them which presumed-living people
+  are in the chart. Anyone with the link can read all of it.
 - To update the chart, rebuild and publish to the same artifact link, so the address stays the same.
